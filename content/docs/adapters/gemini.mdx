@@ -1,0 +1,42 @@
+---
+title: "Gemini Adapter (Google)"
+description: "Use Commerce Gateway with Gemini 1.5 Pro and Flash via Google's function_declarations format."
+section: "LLM Adapters"
+---
+
+## Gemini function declarations
+
+Gemini uses `functionDeclarations` and `functionCall`/`functionResponse` parts. `GeminiAdapter` handles translation from universal schema to Gemini declaration format.
+
+## Installation
+
+```bash
+npm install @commerce-gateway/sdk @google/generative-ai
+```
+
+## Usage example
+
+```ts
+import { GeminiAdapter } from "@betterdata/commerce-gateway/adapters";
+
+const adapter = new GeminiAdapter({
+  apiKey: process.env.GOOGLE_API_KEY!,
+  model: "gemini-1.5-pro",
+  maxToolIterations: 10,
+  tools: ["search_products", "get_recommendations"],
+});
+
+const response = await adapter.handleRequest({
+  messages: [{ role: "user", content: "Recommend skincare bundles under $80" }],
+});
+```
+
+## Model compatibility
+
+Tested against Gemini 1.5 Pro, Gemini 1.5 Flash, and Gemini 2.x function-calling variants.
+
+## Differences vs OpenAI/Claude
+
+- Uses `functionCall` parts instead of OpenAI `tool_calls` or Claude `tool_use`
+- Supports richer nested parameter conversion via Gemini type enums (`OBJECT`, `STRING`, `ARRAY`)
+- Response assembly can include inline and function response parts in one candidate payload

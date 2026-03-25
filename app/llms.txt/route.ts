@@ -1,0 +1,33 @@
+const body = `# Commerce Gateway
+
+Commerce Gateway is an open protocol and self-hostable gateway server
+that connects any LLM (Claude, GPT-4o, Grok, Gemini) to commerce
+platforms through a single, consistent tool schema.
+
+## Packages
+
+- @commerce-gateway/sdk — main developer SDK
+- @commerce-gateway/server — self-hostable gateway server
+- @commerce-gateway/core — tool schema types and validation
+- @commerce-gateway/adapter-anthropic — Claude adapter
+- @commerce-gateway/adapter-openai — OpenAI adapter
+- @commerce-gateway/adapter-grok — Grok (xAI) adapter
+- @commerce-gateway/adapter-gemini — Gemini adapter
+- @commerce-gateway/registry — brand/product registry client
+
+## Links
+
+- Docs: https://commercegateway.io/docs
+- GitHub: https://github.com/commercegateway/commerce-gateway
+- npm: https://www.npmjs.com/org/commerce-gateway
+- Created by: Better Data (https://betterdata.co)
+- Loop Engine integration: https://loopengine.io
+`;
+
+export function GET() {
+  return new Response(body, {
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+    },
+  });
+}

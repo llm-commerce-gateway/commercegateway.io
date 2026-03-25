@@ -1,0 +1,62 @@
+---
+title: "Quick Start"
+description: "Install Commerce Gateway and make your first LLM tool call in under 5 minutes."
+section: "Getting Started"
+---
+
+## 1) Install
+
+```bash
+npm install @commerce-gateway/sdk @anthropic-ai/sdk
+# or
+pnpm add @commerce-gateway/sdk @anthropic-ai/sdk
+```
+
+## 2) Start the gateway server
+
+```bash
+npx @commerce-gateway/server start
+# or with Docker
+docker run -p 3100:3100 commercegateway/server
+```
+
+## 3) Connect your product catalog
+
+```ts
+// gateway.config.ts
+export default {
+  catalog: {
+    baseUrl: "https://api.your-store.com",
+    apiKey: process.env.CATALOG_API_KEY,
+  },
+};
+```
+
+## 4) Make a tool call from Claude
+
+```ts
+import Anthropic from "@anthropic-ai/sdk";
+import { AnthropicAdapter } from "@betterdata/commerce-gateway/adapters";
+
+const adapter = new AnthropicAdapter({
+  apiKey: process.env.ANTHROPIC_API_KEY!,
+  tools: ["search_products", "get_product_details"],
+});
+
+const result = await adapter.handleRequest({
+  model: "claude-3-5-sonnet-latest",
+  messages: [{ role: "user", content: "Find running shoes under $100" }],
+});
+
+console.log(result.message.content);
+```
+
+## 5) What just happened
+
+The gateway translated Claude's tool format, routed the selected tool call to your product API, normalized the response payload, and returned it in Claude-compatible structure.
+
+## Next steps
+
+- [Core Concepts](/docs/getting-started/concepts)
+- [Tool Schema Overview](/docs/tool-schema/overview)
+- [Claude Adapter docs](/docs/adapters/claude)

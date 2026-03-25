@@ -1,0 +1,26 @@
+---
+title: "Configuration"
+description: "Environment variables and runtime configuration for self-hosted Commerce Gateway."
+section: "Self-Hosting"
+---
+
+## Core environment variables
+
+```bash
+COMMERCE_GATEWAY_PORT=3100
+COMMERCE_GATEWAY_LOG_LEVEL=info
+COMMERCE_GATEWAY_AUTH_MODE=api_key
+```
+
+## LLM provider keys
+
+```bash
+ANTHROPIC_API_KEY=...
+OPENAI_API_KEY=...
+XAI_API_KEY=...
+GOOGLE_API_KEY=...
+```
+
+<SelfHostBadge /> These values are fully managed in your own environment and deployment pipeline.
+
+<HostedBadge /> Better Data hosted configures provider integrations in the managed control plane.

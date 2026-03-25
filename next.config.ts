@@ -1,7 +1,35 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const securityHeaders = [
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), payment=()",
+  },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    key: "Content-Security-Policy",
+    value:
+      "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:;",
+  },
+];
+
+const config: NextConfig = {
+  pageExtensions: ["tsx", "ts", "mdx"],
+  experimental: { mdxRs: true },
+  turbopack: {
+    root: __dirname,
+  },
+  outputFileTracingRoot: path.join(__dirname),
+  async headers() {
+    return [{ source: "/(.*)", headers: securityHeaders }];
+  },
 };
 
-export default nextConfig;
+export default config;

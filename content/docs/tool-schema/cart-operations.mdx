@@ -1,0 +1,19 @@
+---
+title: "Cart Operations"
+description: "Cart and checkout-related operations in the Commerce Gateway schema."
+section: "Tool Schema"
+---
+
+## Cart operations
+
+- `add_to_cart`
+- `create_order`
+
+```json
+{
+  "productId": "sku_123",
+  "quantity": 2
+}
+```
+
+Use server-side session state for cart continuity across multi-turn tool loops.

@@ -1,0 +1,59 @@
+---
+title: "Claude Adapter"
+description: "Use Commerce Gateway with Claude (claude-opus-4-6, claude-sonnet-4-6) via the @commerce-gateway/adapter-anthropic package."
+section: "LLM Adapters"
+---
+
+## Installation
+
+```bash
+npm install @commerce-gateway/sdk @anthropic-ai/sdk
+```
+
+## How Claude `tool_use` works
+
+Claude returns `tool_use` content blocks. `AnthropicAdapter` formats tool definitions and iterates tool execution while `stop_reason === "tool_use"`.
+
+## Basic usage (multi-turn loop)
+
+```ts
+import { AnthropicAdapter } from "@betterdata/commerce-gateway/adapters";
+
+const adapter = new AnthropicAdapter({
+  apiKey: process.env.ANTHROPIC_API_KEY!,
+  model: "claude-3-5-sonnet-latest",
+  maxToolIterations: 10,
+  tools: ["search_products", "get_product_details", "add_to_cart"],
+});
+
+const response = await adapter.handleRequest({
+  messages: [{ role: "user", content: "Find black running shoes under $100 and add one to my cart." }],
+});
+```
+
+## Streaming support
+
+Use `handleStreamingRequest()` to consume `start`, `chunk`, `tool_call`, `tool_result`, and `done` events.
+
+```ts
+for await (const event of adapter.handleStreamingRequest({ messages })) {
+  // stream to UI
+}
+```
+
+## Configuration options
+
+| Option | Type | Notes |
+|---|---|---|
+| `apiKey` | string | Anthropic API key |
+| `baseUrl` | string | default `https://api.anthropic.com` |
+| `model` | string | default `claude-3-5-sonnet-latest` |
+| `anthropicVersion` | string | default `2023-06-01` |
+| `maxToolIterations` | number | default `10` |
+
+## Multi-turn loops
+
+Claude may request several tools before final text output. The adapter manages this tool loop until terminal output or max iteration limit.
+
+- npm: `@commerce-gateway/adapter-anthropic`
+- Related: [Loop Engine + Commerce Gateway](/docs/getting-started/concepts#relationship-to-loop-engine)

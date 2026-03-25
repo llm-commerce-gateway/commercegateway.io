@@ -1,0 +1,34 @@
+---
+title: "Tool Schema Overview"
+description: "The Commerce Gateway tool schema defines every commerce operation as a typed, validated LLM tool call."
+section: "Tool Schema"
+---
+
+## What the tool schema is
+
+The schema is TypeScript-first and centered on `UniversalToolDefinition` contracts. Adapters emit vendor-ready formats (Anthropic tool_use, OpenAI function calling, Gemini function declarations) from one source.
+
+## Operation categories
+
+- `product.*` discovery and detail
+- `cart.*` cart session and checkout actions
+- `order.*` order lifecycle
+- `returns.*` return initiation/tracking
+
+## Using getTools by context
+
+The core package exposes scope-filtered tools:
+
+```ts
+import { getToolsByScope } from "@betterdata/commerce-gateway/tools";
+
+const tools = getToolsByScope(["search"]);
+```
+
+## Versioning model
+
+Non-breaking additions include new optional fields and new operations. Breaking changes include renaming/removing fields, operation identifiers, or required argument semantics.
+
+## Custom operations
+
+You can add brand-specific operations by extending your tool registry and exposing those names through your selected adapter.

@@ -1,0 +1,36 @@
+---
+title: "Product Discovery"
+description: "Product discovery operations and parameters for Commerce Gateway."
+section: "Tool Schema"
+---
+
+## Product discovery tools
+
+- `search_products`
+- `get_product_details`
+- `get_recommendations`
+
+## Example request shape
+
+```json
+{
+  "query": "running shoes under 100",
+  "filters": {
+    "category": "shoes",
+    "priceMax": 100
+  },
+  "limit": 10
+}
+```
+
+<APITable>
+
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| `query` | string | yes | Natural language query |
+| `filters.category` | string | no | Category filter |
+| `filters.priceMin` | number | no | Minimum price |
+| `filters.priceMax` | number | no | Maximum price |
+| `limit` | number | no | 1-20 |
+
+</APITable>

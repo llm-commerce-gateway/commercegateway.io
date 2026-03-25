@@ -1,0 +1,27 @@
+---
+title: "Docker"
+description: "Run Commerce Gateway in Docker for local or production self-hosted setups."
+section: "Self-Hosting"
+---
+
+## Quick run
+
+```bash
+docker run --rm -p 3100:3100 \
+  -e COMMERCE_GATEWAY_PORT=3100 \
+  -e OPENAI_API_KEY=$OPENAI_API_KEY \
+  commercegateway/server
+```
+
+## Docker Compose sample
+
+```yaml
+services:
+  gateway:
+    image: commercegateway/server
+    ports:
+      - "3100:3100"
+    environment:
+      COMMERCE_GATEWAY_PORT: 3100
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+```

@@ -1,0 +1,37 @@
+---
+title: "Core Concepts"
+description: "Understand the Commerce Gateway architecture: tool schema, adapters, routing, and the OSS/hosted boundary."
+section: "Getting Started"
+---
+
+## The tool schema
+
+Commerce Gateway keeps a single source of truth for commerce operations. Define once, and adapters render it for each LLM transport.
+
+## Adapters
+
+Each model vendor uses a different function/tool protocol. Commerce Gateway ships adapters for Claude, OpenAI, Grok, and Gemini. The adapter layer maps between a universal schema and vendor-specific request/response formats.
+
+## The gateway server
+
+The self-hosted server handles routing, auth, and response normalization. It is OSS and MIT licensed.
+
+The hosted Better Data runtime adds multi-tenancy, analytics, and merchant-facing portal workflows.
+
+## OSS / hosted boundary
+
+<SelfHostBadge /> Protocol definitions, schema contracts, and self-host runtime are open source.
+
+<HostedBadge /> Multi-tenant cloud runtime, billing, enterprise SSO, and managed control plane remain proprietary.
+
+This follows the same pattern as open protocols in infrastructure:
+
+- HTTP spec is open.
+- Nginx/Apache implementations are open.
+- Managed global edge platforms are commercial.
+
+## Relationship to Loop Engine
+
+Commerce Gateway handles commerce data and actions. Loop Engine governs policy/state transitions around AI decisions. Together, Loop Engine can call Commerce Gateway as a controlled tool source.
+
+[See Loop Engine](https://loopengine.io)

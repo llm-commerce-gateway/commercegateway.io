@@ -1,0 +1,41 @@
+---
+title: "Grok Adapter (xAI)"
+description: "Use Commerce Gateway with Grok via xAI's OpenAI-compatible API."
+section: "LLM Adapters"
+---
+
+## OpenAI-compatible format
+
+Grok uses an OpenAI-compatible tool-calling shape. `GrokAdapter` follows the same integration pattern as `OpenAIAdapter`.
+
+## Installation
+
+```bash
+npm install @commerce-gateway/sdk @xai/sdk
+```
+
+## Key differences from OpenAI
+
+- Base URL: `https://api.x.ai/v1`
+- Authentication env var: `XAI_API_KEY`
+
+## Usage example
+
+```ts
+import { GrokAdapter } from "@betterdata/commerce-gateway/grok";
+
+const adapter = new GrokAdapter({
+  apiKey: process.env.XAI_API_KEY!,
+  baseUrl: "https://api.x.ai/v1",
+  model: "grok-2",
+  tools: ["search_products", "check_availability"],
+});
+
+const response = await adapter.handleRequest({
+  messages: [{ role: "user", content: "Find available wireless earbuds" }],
+});
+```
+
+## Model compatibility
+
+Supports Grok-2 and Grok-3 families that expose compatible tool APIs.

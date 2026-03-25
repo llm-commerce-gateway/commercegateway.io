@@ -1,0 +1,20 @@
+---
+title: "Self-Host Setup"
+description: "Bring up a local Commerce Gateway instance and connect your first backend."
+section: "Getting Started"
+---
+
+## Minimal self-host setup
+
+```bash
+npx @commerce-gateway/server start --port 3100
+```
+
+Set required environment variables:
+
+```bash
+COMMERCE_GATEWAY_PORT=3100
+COMMERCE_GATEWAY_LOG_LEVEL=info
+```
+
+Use [Self-Hosting Overview](/docs/self-hosting/overview) for full deployment options and production hardening.

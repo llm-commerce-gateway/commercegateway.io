@@ -1,0 +1,20 @@
+<svg viewBox="0 0 190 24" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Commerce Gateway logo">
+  <g transform="translate(0,0)" stroke="#059669" stroke-width="2" stroke-linecap="round">
+    <path d="M2 4 L14 12" />
+    <path d="M2 12 L14 12" />
+    <path d="M2 20 L14 12" />
+    <path d="M14 12 L30 4" />
+    <path d="M14 12 L30 20" />
+  </g>
+  <circle cx="14" cy="12" r="2" fill="#059669" />
+  <text
+    x="42"
+    y="16"
+    font-family="'DM Sans', 'Instrument Sans', system-ui, sans-serif"
+    font-size="12"
+    font-weight="600"
+    fill="currentColor"
+  >
+    Commerce Gateway
+  </text>
+</svg>
