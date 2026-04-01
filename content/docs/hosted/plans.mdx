@@ -4,19 +4,41 @@ description: "Better Data hosts Commerce Gateway for teams that want managed inf
 section: "Hosted Platform"
 ---
 
+## Self-hosted (free)
+
+Run Commerce Gateway on your own infrastructure and use **gateway-console** as the free operator UI.
+
+→ [Self-Hosting overview](/docs/self-hosting/overview)  
+→ [gateway-console](/docs/self-hosting/gateway-console)
+
+## Hosted plans
+
+**Contact [hello@betterdata.co](mailto:hello@betterdata.co)** for current pricing and plan details. Hosted packaging and list prices can change; the docs intentionally avoid fixed dollar amounts.
+
+| Feature | Self-Hosted | Hosted |
+|---------|-------------|--------|
+| LLM adapters | All four (OSS) | All four + managed updates |
+| Commerce connectors | Shopify, BigCommerce, WooCommerce (OSS) | Same family + enterprise options |
+| Multi-tenant | No | Yes |
+| Registry | Optional (your registry or ours) | Included in platform |
+| SLA | Self-managed | Target **99.9%** uptime (per agreement) |
+| Analytics | Local opt-in telemetry | Full dashboard |
+| Support | Community | Enterprise / commercial support |
+| Cost | Free (OSS) | **Contact us** |
+
 ## Who hosts Commerce Gateway?
 
 Commerce Gateway is created and maintained by Better Data. The hosted runtime runs on Better Data infrastructure.
 
 ## What's included in hosted
 
-- ✓ Multi-tenant gateway with brand isolation
-- ✓ Brand portal for merchant API configuration
-- ✓ Usage analytics per brand and adapter
-- ✓ Commerce Gateway Registry for LLM discovery
-- ✓ Managed SSL, uptime SLA, and dedicated support
-- ✓ Stripe billing integration
-- ✓ Okta SSO for enterprise teams
+- Multi-tenant gateway with brand isolation
+- Brand portal for merchant API configuration
+- Usage analytics per brand and adapter
+- Commerce Registry / Registry MCP for LLM discovery (`mcp.commercegateway.io`)
+- Managed SSL, uptime SLA, and dedicated support
+- Stripe billing integration
+- Okta SSO for enterprise teams
 
 ## Getting access
 
@@ -27,7 +49,7 @@ Commerce Gateway hosted is currently in private beta for select brands and enter
 
 ## Open source commitment
 
-The gateway protocol, tool schema, and self-hostable server are MIT licensed and remain open source. The hosted platform is a commercial service built on top.
+The gateway protocol, tool schema, and self-hostable packages are **Apache-2.0** and remain open source. The hosted platform is a commercial service built on top.
 
 Comparable model:
 

@@ -1,0 +1,55 @@
+---
+title: "Discovery & Resolution"
+description: "How LLM agents use the Commerce Registry to discover gateway endpoints for brands, GTINs, and categories."
+section: "Registry"
+---
+
+## Resolution endpoints
+
+### Brand resolution
+
+`GET /api/resolve/brand?q={brand_name}`
+
+```bash
+curl "https://registry.commercegateway.io/api/resolve/brand?q=Lume%20Bond"
+```
+
+The registry returns a structured resolution (see [resolution spec](https://github.com/betterdata/bd-forge-main/blob/main/commerce-registry-protocol/spec/resolution.md)) including `found`, match metadata, and a nested **`gateway`** object with `endpoint`, `protocol`, and `capabilities`.
+
+### GTIN resolution
+
+`GET /api/resolve/gtin/{gtin}`
+
+```bash
+curl "https://registry.commercegateway.io/api/resolve/gtin/00312547691215"
+```
+
+### Category resolution
+
+`GET /api/resolve/category/{path}?limit=20&offset=0`
+
+```bash
+curl "https://registry.commercegateway.io/api/resolve/category/beauty/skincare?limit=5"
+```
+
+Returns gateways associated with the category path (exact shape per spec).
+
+## How adapters use the registry
+
+Commerce Gateway ships a **`RegistryClient`** / **`createRegistryClient`** in **`@betterdata/commerce-gateway`**. It calls the same HTTP paths the protocol defines:
+
+```ts
+import { createRegistryClient } from "@betterdata/commerce-gateway";
+
+const registry = createRegistryClient({
+  baseUrl: "https://registry.commercegateway.io",
+});
+
+const result = await registry.resolveBrand("Lume Bond");
+// result.gateway?.endpoint — URL to invoke for commerce tools
+```
+
+For MCP-based remote registry access in hosted environments, see **`@betterdata/registry-mcp`** and the [Hosted Platform overview](/docs/hosted/overview).
+
+→ [Registry Overview](/docs/registry/overview)  
+→ [.well-known Schema](/docs/registry/well-known)

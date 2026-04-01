@@ -1,0 +1,57 @@
+---
+title: "Registry Overview"
+description: "The Commerce Registry Protocol — open standard for merchant gateway discovery and brand/product resolution."
+section: "Registry"
+---
+
+## What is the Commerce Registry?
+
+The Commerce Registry is an open protocol for resolving brand names, product identifiers (GTINs), and categories to **authoritative commerce gateway endpoints**.
+
+An LLM agent that needs products from a brand asks the registry where that brand’s gateway lives, then calls that gateway directly for catalog and commerce operations.
+
+## The open protocol
+
+The protocol is published as **`@betterdata/commerce-registry-protocol`** (Apache-2.0). Anyone can run a compliant registry. Better Data operates a hosted implementation at **`registry.commercegateway.io`**.
+
+## What the registry does
+
+```
+LLM agent: "I need products from Lume Bond"
+        ↓
+Registry: GET /api/resolve/brand?q=Lume+Bond
+        ↓
+Response: gateway.endpoint + protocol + capabilities
+        ↓
+LLM agent calls the brand's gateway directly
+```
+
+The registry **resolves identifiers to endpoints** — it does not proxy product or cart traffic. The gateway handles commerce tool calls.
+
+## Protocol endpoints
+
+### Resolution
+
+- `GET /api/resolve/brand?q={brand_name}`
+- `GET /api/resolve/gtin/{gtin}`
+- `GET /api/resolve/category/{path}?limit=20&offset=0`
+
+### Registration
+
+- `POST /api/gateways`
+- `POST /api/gateways/{id}/verify`
+- `POST /api/gateways/{id}/gtins`
+
+### Discovery
+
+- `GET /.well-known/commerce-gateway.json` on a merchant domain (fallback discovery; see [.well-known Schema](/docs/registry/well-known))
+
+## Running your own registry
+
+The **`@betterdata/registry-mcp`** package provides an OSS registry MCP implementation. For a deployable HTTP wrapper with optional database-backed API keys, see **`apps/registry-mcp-server`** in bd-forge-main (streamable HTTP MCP).
+
+→ [How It Works](/docs/registry/how-it-works)  
+→ [Register a Gateway](/docs/registry/registration)  
+→ [Discovery & Resolution](/docs/registry/discovery)  
+→ [.well-known Schema](/docs/registry/well-known)  
+→ [@betterdata/commerce-registry-protocol on npm](https://www.npmjs.com/package/@betterdata/commerce-registry-protocol)

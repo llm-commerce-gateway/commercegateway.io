@@ -1,0 +1,71 @@
+---
+title: "Gateway Console"
+description: "The free, open-source operator UI for self-hosted Commerce Gateway — configure providers, connectors, keys, and registry connection locally."
+section: "Self-Hosting"
+---
+
+## What is gateway-console?
+
+Gateway Console is a free, open-source Next.js operator UI for running Commerce Gateway in a **single-tenant, self-hosted** configuration. No Better Data account is required; configuration and state are local-first.
+
+It is the recommended way to configure and manage a self-hosted Commerce Gateway — the same pattern as Loop Engine: the runtime and operator tools are free OSS, while Better Data’s managed offering is the paid tier.
+
+**Package:** `@betterdata/gateway-console`  
+**Source:** [github.com/betterdata/bd-forge-main/apps/gateway-console](https://github.com/betterdata/bd-forge-main/tree/main/apps/gateway-console)  
+**Dev port:** `3012`
+
+## What it includes
+
+| Page | Path | Purpose |
+|------|------|---------|
+| Dashboard | `/` | Entry point — links to all areas |
+| Status | `/status` | Gateway health, uptime, latency, errors |
+| Providers | `/providers` | Add, test, and remove LLM providers |
+| Connectors | `/connectors` | Add, test, sync, and remove commerce connectors |
+| Keys | `/keys` | Generate and revoke gateway API keys |
+| Registry | `/registry` | Registry connection and discovery search |
+| Federation | `/federation` | Placeholder — federation comes in a later release |
+| Telemetry | `/telemetry` | Opt-in telemetry (off by default) |
+
+## Quick setup
+
+Gateway Console ships as an app inside the **bd-forge-main** monorepo (it is not a standalone npm install today). From the repo root:
+
+```bash
+pnpm install
+pnpm --filter @betterdata/gateway-console dev
+```
+
+Open [http://localhost:3012](http://localhost:3012).
+
+The console persists configuration to **`gateway.config.json`** in the app working directory:
+
+- LLM provider settings
+- Commerce connector settings
+- Hashed API key metadata (`console.keys`)
+
+No database, Prisma, or multi-tenant backend is required.
+
+## Key generation
+
+The Keys page generates self-hosted gateway keys with a **one-time reveal** — the raw key is shown once, then only a hash is stored locally. This mirrors the key lifecycle model used on the Better Data hosted platform (hashed at rest).
+
+## Registry connection (optional)
+
+The Registry panel connects your self-hosted gateway to the Commerce Registry for discovery. Registration is optional; you can always give LLM clients your gateway URL directly.
+
+→ [Registry Connection](/docs/self-hosting/registry-connection)  
+→ [Registry Overview](/docs/registry/overview)
+
+## Self-hosted vs Better Data hosted
+
+| | Self-Hosted (gateway-console) | Better Data Hosted |
+|--|--|--|
+| Cost | Free | Paid — [contact us](/docs/hosted/plans) |
+| Setup | You run the stack | Managed by Better Data |
+| Multi-tenant | No | Yes |
+| SLA | Self-managed | Better Data SLA |
+| Analytics | Local telemetry (opt-in) | Full analytics dashboard |
+| Registry | Optional | Included |
+
+→ [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted)

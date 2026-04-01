@@ -4,6 +4,59 @@ description: "Commerce Gateway hosted by Better Data for teams that want managed
 section: "Hosted Platform"
 ---
 
-Commerce Gateway is open source and self-hostable. Better Data also operates a hosted platform for teams that want managed operations, enterprise workflows, and support.
+Commerce Gateway is open source and self-hostable. Better Data also operates a **hosted platform** for teams that want managed operations, multi-tenancy, enterprise workflows, and support.
 
-Hosted platform details: [Hosted Plans](/docs/hosted/plans)
+Hosted plan details: [Hosted Plans](/docs/hosted/plans)
+
+## The hosted platform architecture
+
+Better Data’s hosted Commerce Gateway is built from three main layers:
+
+1. **hosted-gateway-mcp** — Multi-tenant MCP HTTP surface. Resolves organization context, applies **capability filtering**, and exposes the commerce tool set each tenant is entitled to. (Today’s open-source story centers on single-tenant self-host; this component is the managed multi-tenant runtime.)
+
+2. **registry-mcp-server** — Remote **Registry MCP** deployed at **`https://mcp.commercegateway.io`**. Accepts JSON-RPC MCP over **streamable HTTP** (`POST /mcp`). When configured with a database, API keys are resolved to an organization (hashed at rest).
+
+3. **Better Data platform** — Org directory, entitlements, analytics, billing, and operational tooling (Prisma-backed services in the main product).
+
+## API authentication
+
+Hosted MCP API keys use the **`gw_mcp_`** prefix. Keys are stored as **SHA-256** hashes; the raw secret is shown once at creation.
+
+Authenticate with:
+
+```http
+Authorization: Bearer gw_mcp_your_key_here
+```
+
+or
+
+```http
+x-api-key: gw_mcp_your_key_here
+```
+
+## Registry MCP
+
+**Health**
+
+```http
+GET https://mcp.commercegateway.io/health
+```
+
+Example response: `{ "status": "ok", "server": "registry-mcp", "version": "1.0.0" }` (version may vary).
+
+**MCP (streamable HTTP)**
+
+```http
+POST https://mcp.commercegateway.io/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Authorization: Bearer gw_mcp_your_key_here
+```
+
+Use JSON-RPC MCP messages per your client. **`GET /mcp` is not supported** — POST only.
+
+For hosted access, onboarding, and keys, contact **[hello@betterdata.co](mailto:hello@betterdata.co)**.
+
+## Self-hosted vs hosted
+
+Not sure which path fits? See [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted).

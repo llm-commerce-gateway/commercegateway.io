@@ -9,6 +9,7 @@ export const docsNav: DocsNavSection[] = [
     items: [
       { title: "Quick Start", slug: "getting-started/quick-start" },
       { title: "Core Concepts", slug: "getting-started/concepts" },
+      { title: "Self-Host or Hosted?", slug: "getting-started/self-host-or-hosted" },
       { title: "Self-Host Setup", slug: "getting-started/self-host" },
     ],
   },
@@ -34,8 +35,20 @@ export const docsNav: DocsNavSection[] = [
     section: "Self-Hosting",
     items: [
       { title: "Overview", slug: "self-hosting/overview" },
+      { title: "gateway-console", slug: "self-hosting/gateway-console" },
       { title: "Configuration", slug: "self-hosting/configuration" },
       { title: "Docker", slug: "self-hosting/docker" },
+      { title: "Registry Connection", slug: "self-hosting/registry-connection" },
+    ],
+  },
+  {
+    section: "Registry",
+    items: [
+      { title: "Overview", slug: "registry/overview" },
+      { title: "How It Works", slug: "registry/how-it-works" },
+      { title: "Register a Gateway", slug: "registry/registration" },
+      { title: "Discovery & Resolution", slug: "registry/discovery" },
+      { title: ".well-known Schema", slug: "registry/well-known" },
     ],
   },
   {

@@ -57,3 +57,7 @@ Claude may request several tools before final text output. The adapter manages t
 
 - npm: `@commerce-gateway/adapter-anthropic`
 - Related: [Loop Engine + Commerce Gateway](/docs/getting-started/concepts#relationship-to-loop-engine)
+
+## Commerce Registry
+
+To resolve brands, GTINs, or categories to gateway endpoints before tool calls, use the [Commerce Registry Protocol](/docs/registry/overview) (`@betterdata/commerce-registry-protocol`) and the HTTP resolution API, or `createRegistryClient` from `@betterdata/commerce-gateway` — see [Discovery & Resolution](/docs/registry/discovery).

@@ -1,0 +1,27 @@
+---
+title: "Registry Connection"
+description: "Connect your self-hosted Commerce Gateway to the Commerce Registry for discovery and resolution."
+section: "Self-Hosting"
+---
+
+## Connecting to the Registry
+
+A self-hosted gateway can **optionally** register with the Commerce Registry so LLM clients can resolve your brand or products to your gateway endpoint.
+
+Registration is optional. A self-hosted gateway works without it if you provide your gateway URL directly to clients.
+
+## Steps
+
+1. In Gateway Console, open **`/registry`**.
+2. Set your Commerce Registry base URL (for example, the Better Data hosted registry at `https://registry.commercegateway.io`, or your own compliant deployment).
+3. Provide your domain and public gateway endpoint for verification.
+4. Complete **domain verification** — typically a DNS TXT record on `_commerce-gateway.{your-domain}` or a token served at `/.well-known/commerce-gateway-verify.json` (see the [registration spec](https://github.com/betterdata/bd-forge-main/blob/main/commerce-registry-protocol/spec/registration.md)).
+5. After verification, your gateway can appear in registry discovery and resolution results.
+
+## Using the Better Data hosted registry
+
+The hosted registry at **`registry.commercegateway.io`** can be used by self-hosted gateways for discovery. Enterprise features (analytics, priority listing, and similar) may require a hosted plan.
+
+→ [Registry Overview](/docs/registry/overview)  
+→ [Register a Gateway](/docs/registry/registration)  
+→ [Discovery & Resolution](/docs/registry/discovery)

@@ -1,0 +1,69 @@
+---
+title: "Self-Host or Hosted?"
+description: "How to choose between self-hosting Commerce Gateway with gateway-console and using the Better Data hosted platform."
+section: "Getting Started"
+---
+
+## Choose your path
+
+Commerce Gateway is open-source. You can run it yourself for free, or use the Better Data hosted platform.
+
+### Self-host (free, open-source)
+
+**Best for:**
+
+- Developers and teams who want full control
+- Single-brand or single-tenant deployments
+- Evaluating Commerce Gateway before committing to hosted
+- Air-gapped or regulated environments
+
+**What you get:**
+
+- Full Commerce Gateway OSS stack (Apache-2.0)
+- **gateway-console** — free operator UI for configuration and keys
+- All four LLM adapters (Anthropic, OpenAI, Grok, Gemini)
+- Shopify, BigCommerce, and WooCommerce connectors
+- Optional registry connection for discovery
+
+→ [Self-Host Setup](/docs/getting-started/self-host)  
+→ [gateway-console](/docs/self-hosting/gateway-console)
+
+### Better Data hosted
+
+**Best for:**
+
+- Multi-brand or multi-tenant deployments
+- Teams who do not want to manage infrastructure
+- Production deployments requiring SLA and support
+
+**What you get:**
+
+- Fully managed Commerce Gateway
+- Multi-tenant org isolation
+- Analytics and monitoring dashboard
+- Enterprise SLA and support
+- Hosted registry MCP at [mcp.commercegateway.io](https://mcp.commercegateway.io)
+
+→ [Hosted Overview](/docs/hosted/overview)  
+→ Contact [hello@betterdata.co](mailto:hello@betterdata.co)
+
+## Decision guide
+
+```
+Do you need multi-tenant (multiple brands/orgs)?
+  YES → Hosted
+  NO  → Self-host
+
+Do you need 99.9% uptime SLA?
+  YES → Hosted
+  NO  → Either works
+
+Are you evaluating Commerce Gateway?
+  YES → Start self-hosted, migrate to hosted when ready
+
+Do you have infrastructure to manage?
+  YES → Self-host
+  NO  → Hosted
+```
+
+You can start self-hosted and migrate to hosted at any time. The OSS packages are the same building blocks the hosted platform uses.
