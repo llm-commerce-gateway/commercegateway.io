@@ -1,0 +1,66 @@
+---
+title: "GTIN Product-Line Claims"
+description: "Attach GS1 / GTIN product-line proof to a verified gateway registration."
+section: "Registry"
+---
+
+# GTIN Product-Line Claims
+
+After your gateway is registered and domain-verified, you can attach GTIN claims to associate specific GS1 product lines with your gateway. This is product-line proof, separate from and additional to domain proof.
+
+## When to use this
+
+GTIN claims are useful when:
+
+- Your gateway serves a known GS1 brand prefix
+- You want agents and resolvers to route product lookups by GTIN to your gateway
+- You need to demonstrate authoritative coverage of specific product lines in the registry
+
+## Prerequisites
+
+- A gateway with `active` status (domain verification complete)
+- A GS1 company prefix or GTIN range you are authorized to claim
+- A certificate, GS1 license document, or proof URL
+
+## Adding a GTIN claim
+
+```bash
+POST /api/gateways/{id}/gtins
+Content-Type: application/json
+
+{
+  "prefix": "0614141",
+  "type": "gs1-company-prefix",
+  "evidenceUrl": "https://www.gs1.org/services/verified-by-gs1/results?gtin=..."
+}
+```
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `prefix` | string | GS1 company prefix or GTIN range |
+| `type` | string | Claim type: `gs1-company-prefix`, `gtin-range`, or `gtin` |
+| `evidenceUrl` | string | URL to a certificate, GS1 record, or proof document |
+
+## Response
+
+```json
+{
+  "id": "gtin_01abc...",
+  "gatewayId": "gw_01abc...",
+  "prefix": "0614141",
+  "type": "gs1-company-prefix",
+  "status": "pending",
+  "evidenceUrl": "https://..."
+}
+```
+
+Claims start in `pending` status. The registry may review evidence before marking a claim `active`.
+
+## Trust model
+
+GTIN claims extend domain proof to product-line proof. A gateway with an active GTIN claim signals that not only does the operator control the brand domain, but they also have documented authority over the associated product lines.
+
+This is optional. A gateway without GTIN claims is still fully functional and discoverable — GTIN claims are supplemental.
+
+→ [Back to registry overview](/docs/registry/overview)  
+→ [Registration spec](/docs/protocol/registration)

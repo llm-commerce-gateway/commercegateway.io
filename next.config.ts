@@ -30,6 +30,20 @@ const config: NextConfig = {
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
+  async redirects() {
+    return [
+      {
+        source: "/docs/registry/registration",
+        destination: "/docs/registry/setup",
+        permanent: true,
+      },
+      {
+        source: "/docs/registry/discovery",
+        destination: "/docs/registry/well-known",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default config;

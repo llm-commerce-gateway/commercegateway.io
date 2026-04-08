@@ -1,0 +1,26 @@
+---
+title: "Self-Hosting a Registry"
+description: "Run your own Commerce Registry Protocol–compliant registry for full control and interoperability."
+section: "Registry"
+---
+
+# Self-Hosting a Registry
+
+You can deploy a **Commerce Registry Protocol**–compliant registry in your own environment. Self-hosted registries interoperate with gateways and resolvers the same way as the public registry — set `REGISTRY_URL` in your gateway configuration to your registry’s base URL.
+
+## Why self-host
+
+- **Data residency and policy** — keep registration and verification data in your infrastructure
+- **Customization** — extend workflows, approvals, or integrations behind the same API shapes your gateway already uses
+- **Interoperability** — any compliant implementation can participate in the open protocol
+
+## Where to start
+
+1. Review the [Commerce Registry Protocol overview](/docs/protocol/overview) and [registration API](/docs/protocol/registration).
+2. Point your gateway at your registry: `REGISTRY_URL=https://your-registry.example.com`
+3. Follow [Register Your Gateway](/docs/registry/setup) using your registry’s base URL instead of `https://registry.betterdata.co`.
+
+Implementation details for a reference registry server may be published alongside the open-source gateway stack; check the [project changelog](/docs/changelog) and main repository for the latest.
+
+→ [Registry overview](/docs/registry/overview)  
+→ [Public registry](https://registry.betterdata.co)

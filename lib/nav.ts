@@ -32,6 +32,16 @@ export const docsNav: DocsNavSection[] = [
     ],
   },
   {
+    section: "Registry",
+    items: [
+      { title: "Overview", slug: "registry/overview" },
+      { title: "Register Your Gateway", slug: "registry/setup" },
+      { title: "Domain Verification", slug: "registry/verification" },
+      { title: ".well-known File", slug: "registry/well-known" },
+      { title: "GTIN Claims", slug: "registry/gtins" },
+    ],
+  },
+  {
     section: "Self-Hosting",
     items: [
       { title: "Overview", slug: "self-hosting/overview" },
@@ -39,16 +49,6 @@ export const docsNav: DocsNavSection[] = [
       { title: "Configuration", slug: "self-hosting/configuration" },
       { title: "Docker", slug: "self-hosting/docker" },
       { title: "Registry Connection", slug: "self-hosting/registry-connection" },
-    ],
-  },
-  {
-    section: "Registry",
-    items: [
-      { title: "Overview", slug: "registry/overview" },
-      { title: "How It Works", slug: "registry/how-it-works" },
-      { title: "Register a Gateway", slug: "registry/registration" },
-      { title: "Discovery & Resolution", slug: "registry/discovery" },
-      { title: ".well-known Schema", slug: "registry/well-known" },
     ],
   },
   {

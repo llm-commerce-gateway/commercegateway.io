@@ -1,0 +1,20 @@
+---
+title: "Resolution API"
+description: "How resolvers and agents discover verified gateways via registry APIs."
+section: "Protocol"
+---
+
+# Resolution API
+
+Protocol-compliant registries expose resolution endpoints so agents can discover which gateway endpoint serves a brand or domain, and whether the record is **verified** (domain control proven) versus **unverified** well-known-only discovery.
+
+Exact paths and query parameters may vary by registry version; consult your registry operator’s API reference. Conceptually, resolution answers:
+
+- **Where** is the gateway (`endpoint` URL)?
+- **What** capabilities does it advertise?
+- **Trust** — was the record verified via registration + domain proof?
+
+Well-known fallback (`/.well-known/commerce-gateway.json`) is defined in the protocol for discovery without a registry; it is treated as lower trust until registration and verification complete. See [.well-known Discovery File](/docs/registry/well-known) and [Protocol .well-known spec](/docs/protocol/well-known).
+
+→ [Registry overview](/docs/registry/overview)  
+→ [Register Your Gateway](/docs/registry/setup)

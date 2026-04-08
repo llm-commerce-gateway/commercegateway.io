@@ -1,0 +1,46 @@
+---
+title: "Registration API"
+description: "Protocol reference for registering a gateway with a Commerce Registry Protocol–compliant server."
+section: "Protocol"
+---
+
+# Registration API
+
+This page summarizes the registration contract used by protocol-compliant registries. For a guided walkthrough, see [Register Your Gateway](/docs/registry/setup).
+
+## Register a gateway
+
+`POST /api/gateways`
+
+**Body (typical):**
+
+```json
+{
+  "brand": "Your Brand Name",
+  "apexDomain": "brand.com",
+  "endpoint": "https://api.brand.com",
+  "protocol": "commerce-gateway/1.0",
+  "capabilities": ["product.search", "cart.add", "order.status"]
+}
+```
+
+**Response (typical, pending verification):**
+
+```json
+{
+  "id": "gw_...",
+  "status": "pending",
+  "verificationToken": "cgv_...",
+  "verificationMethods": ["dns-txt", "well-known-file"]
+}
+```
+
+## Verify domain control
+
+`POST /api/gateways/{id}/verify`
+
+Called after DNS TXT or hosted verification file is in place. See [Domain Verification](/docs/registry/verification).
+
+## GTIN claims
+
+`POST /api/gateways/{id}/gtins` — attach product-line proof after the gateway is `active`. See [GTIN Product-Line Claims](/docs/registry/gtins).

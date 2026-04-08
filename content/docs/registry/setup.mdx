@@ -1,0 +1,109 @@
+---
+title: "Register Your Gateway"
+description: "Step-by-step guide to registering a Commerce Gateway with a protocol-compliant registry and completing domain verification."
+section: "Registry"
+---
+
+# Register Your Gateway
+
+This guide covers the full registration path: deploying your gateway on a domain you control, registering with a registry, and completing domain verification so your gateway is discoverable as `active` and verified.
+
+## Prerequisites
+
+- A running Commerce Gateway deployment at a stable public HTTPS URL (e.g. `https://api.brand.com`)
+- DNS access or HTTPS hosting on the registered domain
+- A protocol-compliant registry URL (default: `https://registry.betterdata.co`)
+
+## Step 1 — Deploy your gateway
+
+Your gateway must be reachable at a public HTTPS endpoint on a hostname you control. This hostname becomes your registered `endpoint` and the basis for domain verification.
+
+```bash
+# Self-hosted example
+REGISTRY_URL=https://registry.betterdata.co \
+GATEWAY_ENDPOINT=https://api.brand.com \
+npm start
+```
+
+→ [Self-hosting guide](/docs/self-hosting/overview)
+
+## Step 2 — Register with the registry
+
+POST to `/api/gateways` on your registry with at minimum:
+
+```json
+{
+  "brand": "Your Brand Name",
+  "apexDomain": "brand.com",
+  "endpoint": "https://api.brand.com",
+  "protocol": "commerce-gateway/1.0",
+  "capabilities": ["product.search", "cart.add", "order.status"]
+}
+```
+
+Optional fields: `aliases`, `categories`, `auth`.
+
+The registry responds with a `pending` registration and a `verificationToken`. Record this token — you will need it in Step 3.
+
+```json
+{
+  "id": "gw_01abc...",
+  "status": "pending",
+  "verificationToken": "cgv_xyz123...",
+  "verificationMethods": ["dns-txt", "well-known-file"]
+}
+```
+
+→ [Full registration spec](/docs/protocol/registration)
+
+## Step 3 — Complete domain verification
+
+Choose either DNS TXT or hosted file verification.
+
+### DNS TXT record
+
+Add a TXT record on your domain's DNS:
+
+Record type: TXT  
+Host: `_commerce-gateway.brand.com`  
+Value: `cgv_xyz123...`
+
+DNS changes may take up to 48 hours to propagate.
+
+### Hosted verification file
+
+Serve this file at:  
+`https://brand.com/.well-known/commerce-gateway-verify.json`
+
+```json
+{
+  "token": "cgv_xyz123..."
+}
+```
+
+The file must be served over HTTPS on the exact registered apex domain.
+
+## Step 4 — Trigger verification
+
+Once your DNS record or verification file is in place, call the verify endpoint:
+
+```bash
+curl -X POST https://registry.betterdata.co/api/gateways/gw_01abc.../verify
+```
+
+When verification passes, your gateway status changes to `active` and becomes discoverable via the registry resolution APIs.
+
+```json
+{
+  "id": "gw_01abc...",
+  "status": "active",
+  "verifiedAt": "2026-04-08T00:00:00Z"
+}
+```
+
+## Next steps
+
+- [Verification methods in detail](/docs/registry/verification)
+- [Attach GTIN product-line claims](/docs/registry/gtins)
+- [.well-known file reference](/docs/registry/well-known)
+- [Resolution API reference](/docs/protocol/resolution)

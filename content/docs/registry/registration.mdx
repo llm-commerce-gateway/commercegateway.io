@@ -1,68 +1,9 @@
 ---
-title: "Register a Gateway"
-description: "How to register your Commerce Gateway with a registry for brand and product discovery."
+title: "Gateway Registration"
+description: "Moved to Register Your Gateway."
 section: "Registry"
 ---
 
-## Registering your gateway
+This page has moved.
 
-Registration makes your gateway discoverable by agents and runtimes that use the Commerce Registry Protocol.
-
-### Step 1 — Register
-
-`POST /api/gateways` with your gateway metadata:
-
-```bash
-curl -X POST https://registry.commercegateway.io/api/gateways \
-  -H "Content-Type: application/json" \
-  -d '{
-    "brand_name": "Lume Bond",
-    "domain": "lumebond.com",
-    "endpoint": "https://api.lumebond.com/mcp",
-    "protocol": "mcp",
-    "capabilities": {
-      "catalog_search": true,
-      "pricing": "public",
-      "inventory": "real_time",
-      "checkout": false
-    }
-  }'
-```
-
-Example response shape (see [registration spec](https://github.com/betterdata/bd-forge-main/blob/main/commerce-registry-protocol/spec/registration.md)):
-
-```json
-{
-  "id": "gw_abc123",
-  "slug": "lumebond",
-  "status": "pending",
-  "verification": { "dns_txt": { "record": "_commerce-gateway.lumebond.com", "value": "bd-verify-..." } }
-}
-```
-
-### Step 2 — Verify domain
-
-`POST /api/gateways/{id}/verify` after you complete verification:
-
-- **DNS TXT** — Add the TXT record the registry returns for `_commerce-gateway.{domain}`.
-- **Well-known** — Serve the verification token at `https://{domain}/.well-known/commerce-gateway-verify.json` as specified in the registration response.
-
-### Step 3 — Register GTINs (optional)
-
-`POST /api/gateways/{id}/gtins` with a list of GTINs your gateway should be authoritative for:
-
-```json
-{ "gtins": ["00312547691215", "00312547691216"] }
-```
-
-## Capabilities
-
-| Capability | Values | Meaning |
-|-----------|--------|---------|
-| `catalog_search` | `true` / `false` | Gateway supports product search |
-| `pricing` | `"public"` / `"private"` / `"none"` | Price visibility |
-| `inventory` | `"real_time"` / `"cached"` / `"none"` | Inventory signal |
-| `checkout` | `true` / `false` | Cart / checkout supported |
-
-→ [Discovery & Resolution](/docs/registry/discovery)  
-→ [.well-known Schema](/docs/registry/well-known)
+→ [Register Your Gateway](/docs/registry/setup)

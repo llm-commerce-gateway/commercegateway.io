@@ -1,57 +1,45 @@
 ---
 title: "Registry Overview"
-description: "The Commerce Registry Protocol — open standard for merchant gateway discovery and brand/product resolution."
+description: "How the Commerce Gateway Registry works, what verification means, and where to start."
 section: "Registry"
 ---
 
-## What is the Commerce Registry?
+# Registry Overview
 
-The Commerce Registry is an open protocol for resolving brand names, product identifiers (GTINs), and categories to **authoritative commerce gateway endpoints**.
-
-An LLM agent that needs products from a brand asks the registry where that brand’s gateway lives, then calls that gateway directly for catalog and commerce operations.
-
-## The open protocol
-
-The protocol is published as **`@betterdata/commerce-registry-protocol`** (Apache-2.0). Anyone can run a compliant registry. Better Data operates a hosted implementation at **`registry.commercegateway.io`**.
+The Commerce Gateway Registry is an open directory of verified AI commerce gateways. It implements the Commerce Registry Protocol — an open, versioned specification for gateway registration, domain verification, and agent-facing discovery.
 
 ## What the registry does
 
-```
-LLM agent: "I need products from Lume Bond"
-        ↓
-Registry: GET /api/resolve/brand?q=Lume+Bond
-        ↓
-Response: gateway.endpoint + protocol + capabilities
-        ↓
-LLM agent calls the brand's gateway directly
-```
+When an AI agent needs to call commerce operations for a brand, it needs to know two things: where the gateway is, and whether it can be trusted. The registry answers both.
 
-The registry **resolves identifiers to endpoints** — it does not proxy product or cart traffic. The gateway handles commerce tool calls.
+A gateway listed as `active` in the registry has completed domain verification — the registrant proved they control the brand's apex domain via DNS or a hosted token file. Agents and resolvers treat this as verified, higher-trust discovery.
 
-## Protocol endpoints
+## Two levels of discovery
 
-### Resolution
+### 1. Verified registration (higher trust)
 
-- `GET /api/resolve/brand?q={brand_name}`
-- `GET /api/resolve/gtin/{gtin}`
-- `GET /api/resolve/category/{path}?limit=20&offset=0`
+Full registration + domain verification via a protocol-compliant registry. This is the recommended path for any production gateway.
 
-### Registration
+→ [Setup guide](/docs/registry/setup)
 
-- `POST /api/gateways`
-- `POST /api/gateways/{id}/verify`
-- `POST /api/gateways/{id}/gtins`
+### 2. .well-known only (lower trust)
 
-### Discovery
+Publish `/.well-known/commerce-gateway.json` on your domain. Resolvers implementing the protocol can find your gateway via well-known fallback. The spec treats this as unverified until you complete registry registration and domain verification.
 
-- `GET /.well-known/commerce-gateway.json` on a merchant domain (fallback discovery; see [.well-known Schema](/docs/registry/well-known))
+→ [.well-known spec](/docs/registry/well-known)
 
-## Running your own registry
+## Which registry to use
 
-The **`@betterdata/registry-mcp`** package provides an OSS registry MCP implementation. For a deployable HTTP wrapper with optional database-backed API keys, see **`apps/registry-mcp-server`** in bd-forge-main (streamable HTTP MCP).
+The Better Data public registry is available at `https://registry.betterdata.co`. You can also self-host a registry using the Commerce Registry Protocol.
 
-→ [How It Works](/docs/registry/how-it-works)  
-→ [Register a Gateway](/docs/registry/registration)  
-→ [Discovery & Resolution](/docs/registry/discovery)  
-→ [.well-known Schema](/docs/registry/well-known)  
-→ [@betterdata/commerce-registry-protocol on npm](https://www.npmjs.com/package/@betterdata/commerce-registry-protocol)
+Set `REGISTRY_URL` in your gateway config to point at any protocol-compliant registry — public or self-hosted.
+
+→ [Self-hosting a registry](/docs/registry/self-hosting)  
+→ [Protocol specification](/docs/protocol/overview)
+
+## Next steps
+
+- [Register and verify your gateway](/docs/registry/setup)
+- [Domain verification methods](/docs/registry/verification)
+- [.well-known file reference](/docs/registry/well-known)
+- [GTIN product-line claims](/docs/registry/gtins)

@@ -1,0 +1,83 @@
+---
+title: "Domain Verification"
+description: "DNS TXT and hosted file methods for proving domain control during gateway registration."
+section: "Registry"
+---
+
+# Domain Verification
+
+Domain verification proves that you control the brand domain where your gateway runs. It is required to move a registered gateway from `pending` to `active` status.
+
+Two methods are supported. Both result in the same verified status. Choose whichever fits your infrastructure.
+
+## Method 1 — DNS TXT record
+
+Add a TXT record at the verification subdomain on your apex domain.
+
+| Field | Value |
+| --- | --- |
+| Record type | TXT |
+| Host | `_commerce-gateway.{your-apex-domain}` |
+| Value | Your verification token (issued at registration) |
+| TTL | 300 or lower recommended for faster checks |
+
+**Example** for `brand.com` with token `cgv_xyz123`:
+
+`_commerce-gateway.brand.com` TXT `"cgv_xyz123"`
+
+After adding the record, trigger verification:
+
+```bash
+POST /api/gateways/{id}/verify
+```
+
+The registry queries DNS for the TXT record and checks the token value. DNS propagation can take up to 48 hours — if verification fails immediately, wait and retry.
+
+## Method 2 — Hosted verification file
+
+Serve a JSON file at the well-known path on your apex domain.
+
+**URL:** `https://{your-apex-domain}/.well-known/commerce-gateway-verify.json`
+
+**File contents:**
+
+```json
+{
+  "token": "cgv_xyz123..."
+}
+```
+
+Requirements:
+
+- Must be served over HTTPS
+- Must be on the exact apex domain registered (not a subdomain)
+- Must return HTTP 200 with `Content-Type: application/json`
+- Token must match the value issued at registration exactly
+
+After the file is reachable, trigger verification:
+
+```bash
+POST /api/gateways/{id}/verify
+```
+
+The registry fetches the file and checks the token value.
+
+## Verification status
+
+| Status | Meaning |
+| --- | --- |
+| `pending` | Registered, verification not yet completed |
+| `active` | Domain verified, discoverable as verified |
+| `failed` | Verification check failed — retry after fixing DNS or file |
+| `expired` | Token expired — re-register to get a new token |
+
+## Troubleshooting
+
+**DNS not propagating** — use a DNS checker to confirm the TXT record is visible before calling `/verify`. The registry checks from its own resolvers, which may differ from yours.
+
+**File returning 404** — confirm the path is exactly `/.well-known/commerce-gateway-verify.json` and that your server does not strip the `.well-known` directory.
+
+**Token mismatch** — tokens are case-sensitive. Copy the exact token string from the registration response.
+
+→ [Back to setup guide](/docs/registry/setup)  
+→ [Registration spec](/docs/protocol/registration)

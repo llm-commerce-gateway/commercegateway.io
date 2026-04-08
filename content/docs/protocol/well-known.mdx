@@ -1,0 +1,19 @@
+---
+title: "Protocol — .well-known"
+description: "Normative notes for /.well-known/commerce-gateway.json under the Commerce Gateway / Registry protocol."
+section: "Protocol"
+---
+
+# Protocol — .well-known
+
+The protocol specifies a discovery file at:
+
+`https://{domain}/.well-known/commerce-gateway.json`
+
+Served over **HTTPS**, **HTTP 200**, **`Content-Type: application/json`**.
+
+Trust semantics: discovery via this file alone is **unverified** until the operator completes **registry registration** and **domain verification**. Verified listings are reflected in registry resolution responses.
+
+For field-level schema, examples, and operational guidance, see the reference doc [.well-known Discovery File](/docs/registry/well-known).
+
+→ [Register and verify](/docs/registry/setup)
