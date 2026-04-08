@@ -58,4 +58,8 @@ export const docsNav: DocsNavSection[] = [
       { title: "Plans", slug: "hosted/plans" },
     ],
   },
+  {
+    section: "Project",
+    items: [{ title: "Changelog", slug: "changelog" }],
+  },
 ];

@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
 
 const links = [
   { label: "DOCS", href: "/docs" },
-  { label: "BLOG", href: "/blog" },
+  { label: "BLOG", href: "https://betterdata.co/blog/tags/commerce-gateway" },
+  { label: "CHANGELOG", href: "https://betterdata.co/changelog?module=commerce-gateway" },
+  { label: "RELEASES", href: "https://github.com/llm-commerce-gateway/llm-commerce-gateway/releases" },
   { label: "PARTNERS", href: "/partners" },
   { label: "REGISTRY", href: "/registry" },
   { label: "GITHUB", href: "https://github.com/commercegateway/commerce-gateway" },
