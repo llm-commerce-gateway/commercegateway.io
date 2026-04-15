@@ -16,8 +16,9 @@ export function Hero() {
             Every LLM. Every commerce platform. One tool schema.
           </h1>
           <p className="mt-4 max-w-[600px]" style={{ color: "var(--color-ink-secondary)", fontSize: "var(--text-lg)" }}>
-            Commerce Gateway is an open protocol and self-hostable server that lets any AI agent - Claude, GPT-4o,
-            Grok, Gemini - call commerce operations through a single, consistent tool interface.
+            Commerce Gateway is an open protocol and self-hostable server that lets any AI agent — Claude, GPT-4o, Grok,
+            Gemini — call commerce operations through one consistent tool interface. Pair it with Commerce Registry for
+            discovery; both are first-class in the Better Data workspace (self-host and OSS paths use the same protocol).
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

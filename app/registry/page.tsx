@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Commerce Gateway Registry",
+  title: "Commerce Registry",
   description:
-    "Open, protocol-native directory of verified AI commerce gateways. Register once, discoverable by any agent that speaks the Commerce Gateway Protocol.",
+    "Discovery and identity for Commerce Gateway — native to the Better Data platform, with an open protocol for self-hosted and OSS deployments.",
 };
 
 function TrustBadge({ label }: { label: string }) {
@@ -28,23 +28,32 @@ export default function RegistryPage() {
     <main className="px-4 py-12">
       {/* SECTION 1 — Hero */}
       <section className="mx-auto max-w-6xl">
-        <h1 className="font-semibold text-4xl">The Commerce Gateway Registry</h1>
+        <h1 className="font-semibold text-4xl">Commerce Registry</h1>
         <p className="mt-3 max-w-3xl text-base text-muted-foreground leading-7">
-          An open, protocol-native directory of verified AI commerce gateways. Register your gateway once. Discoverable by any
-          agent that speaks the Commerce Gateway Protocol.
+          Discovery and identity for gateways that speak the Commerce Gateway Protocol. In Better Data, registry setup runs
+          in-product alongside gateway configuration — the same workspace, not a separate external registration product. This
+          page documents verification, APIs, and self-hosted options for the open protocol.
         </p>
         <div className="mt-6 flex flex-wrap gap-4">
-          <Link
-            href="/docs/registry/setup"
+          <a
+            href="https://app.betterdata.co/sign-up?utm_source=commercegateway.io&utm_medium=site&utm_campaign=registry_native"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-lg border border-emerald-600 bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-700"
           >
-            Register your gateway
+            Open in Better Data
+          </a>
+          <Link
+            href="/docs/registry/setup"
+            className="inline-flex items-center justify-center rounded-lg border border-emerald-600 bg-background px-5 py-2.5 text-sm font-medium text-emerald-700 hover:bg-emerald-50"
+          >
+            View setup docs
           </Link>
           <Link
             href="/registry#directory"
-            className="inline-flex items-center justify-center rounded-lg border border-emerald-600 bg-background px-5 py-2.5 text-sm font-medium text-emerald-700 hover:bg-emerald-50"
+            className="inline-flex items-center justify-center rounded-lg border border-zinc-200 bg-background px-5 py-2.5 text-sm font-medium text-foreground hover:bg-zinc-50"
           >
-            Browse the registry
+            Browse the directory
           </Link>
         </div>
       </section>

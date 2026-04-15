@@ -2,6 +2,7 @@ import { Adapters } from "@/components/home/Adapters";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { UseCases } from "@/components/home/UseCases";
+import { WorksWith } from "@/components/home/WorksWith";
 
 export default function Home() {
   const homeJsonLd = {
@@ -29,6 +30,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }} />
       <Hero />
       <HowItWorks />
+      <WorksWith />
       <Adapters />
       <UseCases />
     </>

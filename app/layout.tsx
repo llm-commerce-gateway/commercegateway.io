@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { DM_Sans, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/home/Footer";
 import { TopNav } from "@/components/nav/TopNav";
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <TopNav />
         {children}
         <Footer />
+        <GoogleAnalytics gaId="G-Y5R44BVFYX" />
       </body>
     </html>
   );
