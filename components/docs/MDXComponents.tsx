@@ -1,4 +1,6 @@
 import type { MDXComponents as Components } from "mdx/types";
+import type { ComponentProps } from "react";
+import { headingId } from "@/lib/docs";
 import { CodeBlock } from "./CodeBlock";
 
 type CalloutVariant = "info" | "warning" | "tip";
@@ -42,6 +44,8 @@ function Note({ children }: { children: React.ReactNode }) {
 }
 
 export const MDXComponents: Components = {
+  h2: ({ children }: ComponentProps<"h2">) => <h2 id={headingId(String(children ?? ""))}>{children}</h2>,
+  h3: ({ children }: ComponentProps<"h3">) => <h3 id={headingId(String(children ?? ""))}>{children}</h3>,
   pre: ({ children }) => <>{children}</>,
   code: ({ children, className }) => {
     if (!className) {
@@ -74,5 +78,8 @@ export const MDXComponents: Components = {
   SelfHostBadge,
   HostedBadge,
 };
+
+/** `next-mdx-remote` prop name */
+export const mdxComponents = MDXComponents;
 
 export { Callout, Note, APITable, SelfHostBadge, HostedBadge };

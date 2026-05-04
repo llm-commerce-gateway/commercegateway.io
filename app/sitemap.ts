@@ -1,21 +1,21 @@
 import type { MetadataRoute } from "next";
 import { getAllDocs } from "@/lib/docs";
 
+const BASE = "https://commercegateway.io";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const docs = await getAllDocs();
-  const base = "https://commercegateway.io";
-
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${base}/`, priority: 1.0, changeFrequency: "weekly" },
-    { url: `${base}/docs/getting-started/quick-start`, priority: 0.9, changeFrequency: "weekly" },
-    { url: `${base}/docs/adapters/claude`, priority: 0.8, changeFrequency: "weekly" },
-  ];
 
   const docRoutes: MetadataRoute.Sitemap = docs.map((doc) => ({
-    url: `${base}/docs/${doc.pathSlug}`,
-    priority: doc.pathSlug.startsWith("getting-started/") ? 0.9 : doc.pathSlug.startsWith("adapters/") ? 0.8 : 0.7,
+    url: doc.frontmatter.canonical ?? `${BASE}/docs/${doc.slugPath}`,
+    priority: doc.slugPath.startsWith("getting-started/") ? 0.9 : doc.slugPath.startsWith("adapters/") ? 0.8 : 0.7,
     changeFrequency: "weekly",
   }));
 
-  return [...staticRoutes, ...docRoutes];
+  return [
+    { url: `${BASE}/`, priority: 1.0, changeFrequency: "weekly" },
+    { url: `${BASE}/partners`, priority: 0.65, changeFrequency: "monthly" },
+    { url: `${BASE}/registry`, priority: 0.75, changeFrequency: "weekly" },
+    ...docRoutes,
+  ];
 }

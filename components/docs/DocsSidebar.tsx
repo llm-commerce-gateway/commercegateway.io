@@ -3,46 +3,63 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
-import { docsNav } from "@/lib/nav";
+import type { DocNavSection } from "@/lib/docs";
 
-export function DocsSidebar() {
+type DocsSidebarProps = {
+  sections: DocNavSection[];
+};
+
+function isActive(pathname: string, href: string): boolean {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+export function DocsSidebar({ sections }: DocsSidebarProps) {
   const pathname = usePathname();
   const [query, setQuery] = useState("");
+  const normalizedQuery = query.trim().toLowerCase();
 
-  const nav = useMemo(() => {
-    if (!query.trim()) return docsNav;
-    const q = query.toLowerCase();
-    return docsNav
+  const visible = useMemo(() => {
+    if (!normalizedQuery) return sections;
+    return sections
       .map((section) => ({
         ...section,
-        items: section.items.filter((item) => item.title.toLowerCase().includes(q) || item.slug.includes(q)),
+        items: section.items.filter(
+          (item) =>
+            item.title.toLowerCase().includes(normalizedQuery) ||
+            item.href.toLowerCase().includes(normalizedQuery),
+        ),
       }))
       .filter((section) => section.items.length > 0);
-  }, [query]);
+  }, [normalizedQuery, sections]);
 
   return (
     <aside className="space-y-4">
       <input
         value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Search docs..."
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Filter docs..."
         className="w-full rounded border px-3 py-2 text-sm"
         style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}
       />
 
-      {nav.map((group) => (
-        <section key={group.section}>
+      {visible.length === 0 ? (
+        <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+          No matching pages.
+        </p>
+      ) : null}
+
+      {visible.map((group) => (
+        <section key={group.label}>
           <h3 className="mono text-xs" style={{ color: "var(--color-primary)" }}>
-            {group.section}
+            {group.label}
           </h3>
           <ul className="mt-2 space-y-1">
             {group.items.map((item) => {
-              const href = `/docs/${item.slug}`;
-              const active = pathname === href;
+              const active = isActive(pathname, item.href);
               return (
-                <li key={item.slug}>
+                <li key={item.href}>
                   <Link
-                    href={href}
+                    href={item.href}
                     className="block rounded px-2 py-1 text-sm"
                     style={{
                       color: active ? "var(--color-primary-dark)" : "var(--color-ink-secondary)",

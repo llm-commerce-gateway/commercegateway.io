@@ -1,7 +1,10 @@
 import type { ReactNode } from "react";
-import { DocsSidebar } from "@/components/nav/DocsSidebar";
+import { DocsSidebar } from "@/components/docs/DocsSidebar";
+import { getNavTree } from "@/lib/docs";
 
-export default function DocsLayout({ children }: { children: ReactNode }) {
+export default async function DocsLayout({ children }: { children: ReactNode }) {
+  const nav = await getNavTree();
+
   return (
     <section className="container py-8">
       <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -15,9 +18,9 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             scrollbarWidth: "thin",
           }}
         >
-          <DocsSidebar />
+          <DocsSidebar sections={nav} />
         </div>
-        <article className="prose min-w-0 pb-12">{children}</article>
+        <article className="min-w-0 pb-12">{children}</article>
       </div>
     </section>
   );

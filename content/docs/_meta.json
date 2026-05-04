@@ -1,0 +1,13 @@
+{
+  "order": [
+    "getting-started",
+    "tool-schema",
+    "adapters",
+    "protocol",
+    "registry",
+    "self-hosting",
+    "hosted",
+    "resources",
+    "changelog"
+  ]
+}
