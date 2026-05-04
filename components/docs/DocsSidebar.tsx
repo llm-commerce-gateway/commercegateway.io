@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import type { DocNavSection } from "@/lib/docs";
+import { DOCS_SEARCH_OPEN_EVENT } from "@/lib/docs-search-events";
 
 type DocsSidebarProps = {
   sections: DocNavSection[];
@@ -34,6 +35,23 @@ export function DocsSidebar({ sections }: DocsSidebarProps) {
 
   return (
     <aside className="space-y-4">
+      <div>
+        <p className="mono mb-2 text-xs" style={{ color: "var(--color-ink-muted)" }}>
+          Search
+        </p>
+        <button
+          type="button"
+          className="w-full rounded border px-3 py-2 text-left text-sm transition-colors hover:bg-[var(--color-surface-alt)]"
+          style={{ borderColor: "var(--color-border)", color: "var(--color-ink-secondary)" }}
+          onClick={() =>
+            window.dispatchEvent(
+              new CustomEvent(DOCS_SEARCH_OPEN_EVENT, { detail: { source: "sidebar" } }),
+            )
+          }
+        >
+          Open search <span className="opacity-70">⌘K</span>
+        </button>
+      </div>
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}

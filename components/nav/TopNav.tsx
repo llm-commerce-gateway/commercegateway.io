@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { inferPageType } from "@/lib/analytics/posthog";
 import { trackCtaClicked, trackOutboundClicked } from "@/lib/analytics/events";
+import { DOCS_SEARCH_OPEN_EVENT } from "@/lib/docs-search-events";
 
 const links = [
   { label: "DOCS", href: "/docs" },
@@ -19,6 +20,12 @@ const links = [
 export function TopNav() {
   const pathname = usePathname();
   const pageType = inferPageType(pathname);
+
+  const openDocsSearch = () => {
+    window.dispatchEvent(
+      new CustomEvent(DOCS_SEARCH_OPEN_EVENT, { detail: { source: "header" as const } }),
+    );
+  };
 
   return (
     <header
@@ -36,7 +43,36 @@ export function TopNav() {
           <Image src="/logo.svg" alt="Commerce Gateway" width={190} height={24} priority />
         </Link>
 
+        {pathname.startsWith("/docs") ? (
+          <button
+            type="button"
+            className="mono rounded border px-2 py-1 md:hidden"
+            style={{
+              borderColor: "var(--color-border)",
+              fontSize: "var(--text-xs)",
+              color: "var(--color-ink-secondary)",
+            }}
+            onClick={openDocsSearch}
+          >
+            Search
+          </button>
+        ) : null}
+
         <nav className="hidden items-center gap-5 md:flex">
+          {pathname.startsWith("/docs") ? (
+            <button
+              type="button"
+              className="mono"
+              style={{
+                fontSize: "var(--text-xs)",
+                letterSpacing: "0.08em",
+                color: "var(--color-ink-tertiary)",
+              }}
+              onClick={openDocsSearch}
+            >
+              SEARCH <span style={{ opacity: 0.7 }}>⌘K</span>
+            </button>
+          ) : null}
           {links.map((link) => {
             const isExternal = link.href.startsWith("http");
             const active = pathname.startsWith(link.href) && !isExternal;

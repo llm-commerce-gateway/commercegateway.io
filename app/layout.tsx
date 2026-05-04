@@ -4,6 +4,7 @@ import { DM_Sans, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/home/Footer";
 import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 import { TopNav } from "@/components/nav/TopNav";
+import { DocsSearchModalHost } from "@/components/docs/DocsSearchModalHost";
 import "./globals.css";
 import "../styles/tokens.css";
 
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </Script>
         <PostHogProvider>
           <TopNav />
+          <DocsSearchModalHost />
           {children}
           <Footer />
         </PostHogProvider>
