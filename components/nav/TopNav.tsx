@@ -3,12 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { inferPageType } from "@/lib/analytics/posthog";
+import { trackCtaClicked, trackOutboundClicked } from "@/lib/analytics/events";
 
 const links = [
   { label: "DOCS", href: "/docs" },
   { label: "BLOG", href: "https://betterdata.co/blog/tags/commerce-gateway" },
   { label: "CHANGELOG", href: "https://betterdata.co/changelog?module=commerce-gateway" },
-  { label: "RELEASES", href: "https://github.com/llm-commerce-gateway/llm-commerce-gateway/releases" },
+  { label: "RELEASES", href: "https://github.com/commercegateway/commerce-gateway/releases" },
   { label: "PARTNERS", href: "/partners" },
   { label: "REGISTRY", href: "/registry" },
   { label: "GITHUB", href: "https://github.com/commercegateway/commerce-gateway" },
@@ -16,6 +18,7 @@ const links = [
 
 export function TopNav() {
   const pathname = usePathname();
+  const pageType = inferPageType(pathname);
 
   return (
     <header
@@ -37,12 +40,70 @@ export function TopNav() {
           {links.map((link) => {
             const isExternal = link.href.startsWith("http");
             const active = pathname.startsWith(link.href) && !isExternal;
+
+            const trackClick = () => {
+              if (!isExternal) {
+                if (link.href.startsWith("/docs")) {
+                  trackCtaClicked({
+                    cta: "view_docs",
+                    location: "top_nav_desktop",
+                    destination: link.href,
+                    pageType,
+                  });
+                }
+                return;
+              }
+              const lbl = link.label.toLowerCase();
+              if (lbl === "blog" || lbl === "changelog") {
+                trackOutboundClicked({
+                  label: lbl,
+                  destination: link.href,
+                  location: "top_nav_desktop",
+                  pageType,
+                });
+              } else if (lbl === "github" || lbl === "releases") {
+                trackOutboundClicked({
+                  label: lbl,
+                  destination: link.href,
+                  location: "top_nav_desktop",
+                  pageType,
+                });
+              } else if (lbl === "partners") {
+                trackCtaClicked({
+                  cta: "partners",
+                  location: "top_nav_desktop",
+                  destination: link.href,
+                  pageType,
+                });
+              } else if (lbl === "registry") {
+                trackCtaClicked({
+                  cta: "registry",
+                  location: "top_nav_desktop",
+                  destination: link.href,
+                  pageType,
+                });
+              }
+            };
+
+            const dataPh =
+              link.label === "DOCS"
+                ? "view_docs"
+                : link.label === "BLOG"
+                  ? "read_blog"
+                  : link.label === "CHANGELOG"
+                    ? "read_changelog"
+                    : link.label === "GITHUB"
+                      ? "github"
+                      : undefined;
+
             return (
               <a
                 key={link.label}
                 href={link.href}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noreferrer" : undefined}
+                data-ph-cta={dataPh}
+                onClick={trackClick}
                 className="mono"
                 style={{
                   fontSize: "var(--text-xs)",
@@ -69,16 +130,25 @@ export function TopNav() {
               fontSize: "var(--text-xs)",
             }}
           >
-            @commerce-gateway/sdk v0.1.0
+            @commerce-gateway/sdk
           </a>
           <Link
             href="/docs/getting-started/quick-start"
             className="mono rounded px-3 py-2"
+            data-ph-cta="get_started"
             style={{
               background: "var(--color-primary)",
               color: "white",
               fontSize: "var(--text-xs)",
             }}
+            onClick={() =>
+              trackCtaClicked({
+                cta: "get_started",
+                location: "top_nav_desktop",
+                destination: "/docs/getting-started/quick-start",
+                pageType,
+              })
+            }
           >
             Get Started
           </Link>

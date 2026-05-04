@@ -38,8 +38,7 @@ export default {
 ## 4) Make a tool call from Claude
 
 ```ts
-import Anthropic from "@anthropic-ai/sdk";
-import { AnthropicAdapter } from "@betterdata/commerce-gateway/adapters";
+import { AnthropicAdapter } from "@commerce-gateway/sdk/adapters";
 
 const adapter = new AnthropicAdapter({
   apiKey: process.env.ANTHROPIC_API_KEY!,
@@ -47,11 +46,11 @@ const adapter = new AnthropicAdapter({
 });
 
 const result = await adapter.handleRequest({
-  model: "claude-3-5-sonnet-latest",
+  model: "claude-sonnet-4-6",
   messages: [{ role: "user", content: "Find running shoes under $100" }],
 });
 
-console.log(result.message.content);
+console.log(result.choices[0]?.message.content);
 ```
 
 ## 5) What just happened

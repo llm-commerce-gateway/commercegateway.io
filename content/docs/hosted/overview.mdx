@@ -1,62 +1,86 @@
 ---
 title: "Hosted Platform Overview"
-description: "Commerce Gateway hosted by Better Data for teams that want managed infrastructure."
+description: "Better Data hosts Commerce Gateway for teams that want managed infrastructure, multi-tenancy, analytics, and SLA."
 section: "Hosted Platform"
 ---
 
-Commerce Gateway is open source and self-hostable. Better Data also operates a **hosted platform** for teams that want managed operations, multi-tenancy, enterprise workflows, and support.
+Commerce Gateway is open source and self-hostable. Better Data also operates a **hosted platform** for teams that want managed infrastructure, multi-tenancy, enterprise workflows, and SLA.
 
-Hosted plan details: [Hosted Plans](/docs/hosted/plans)
+<Note>
+**Private beta.** The hosted platform is available to select brands and enterprise teams. [Request access →](mailto:hello@betterdata.co)
+</Note>
 
-## The hosted platform architecture
+---
 
-Better Data’s hosted Commerce Gateway is built from three main layers:
+## The free / paid ladder
 
-1. **hosted-gateway-mcp** — Multi-tenant MCP HTTP surface. Resolves organization context, applies **capability filtering**, and exposes the commerce tool set each tenant is entitled to. (Today’s open-source story centers on single-tenant self-host; this component is the managed multi-tenant runtime.)
+| | Self-Hosted (free) | Better Data Hosted |
+|--|--|--|
+| Gateway runtime | You deploy and manage | Managed by Better Data |
+| Gateway Console | Free hosted UI — coming soon | Included |
+| Commerce Registry | Free listing at registry.betterdata.co | Included |
+| LLM adapters | All four (OSS) | All four + managed updates |
+| Multi-tenant | No | Yes — brand isolation |
+| Analytics | Opt-in local telemetry | Full usage dashboard |
+| SLA | Self-managed | 99.9% uptime target |
+| Support | Community (GitHub, Discord) | Enterprise / commercial |
+| Cost | Free | Contact us |
 
-2. **registry-mcp-server** — Remote **Registry MCP** deployed at **`https://mcp.commercegateway.io`**. Accepts JSON-RPC MCP over **streamable HTTP** (`POST /mcp`). When configured with a database, API keys are resolved to an organization (hashed at rest).
+→ [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted)  
+→ [Hosted Plans](/docs/hosted/plans)
 
-3. **Better Data platform** — Org directory, entitlements, analytics, billing, and operational tooling (Prisma-backed services in the main product).
+---
 
-## API authentication
+## What the hosted platform includes
 
-Hosted MCP API keys use the **`gw_mcp_`** prefix. Keys are stored as **SHA-256** hashes; the raw secret is shown once at creation.
+### Managed gateway infrastructure
 
-Authenticate with:
+Better Data runs Commerce Gateway on managed infrastructure with automatic updates, SSL, and uptime monitoring. No servers to manage, no deployments to coordinate.
 
-```http
-Authorization: Bearer gw_mcp_your_key_here
-```
+### Gateway Console
 
-or
+The operator UI for managing providers, connectors, keys, and registry status. Free tier available for self-hosted deployments. Fully managed on the hosted platform.
 
-```http
-x-api-key: gw_mcp_your_key_here
-```
+### Commerce Registry
 
-## Registry MCP
+Your gateway is listed and verified in the public Commerce Registry at `registry.betterdata.co`. Domain verification and GTIN product-line claims are managed through the platform.
 
-**Health**
+### Brand portal
 
-```http
-GET https://mcp.commercegateway.io/health
-```
+Merchant-facing configuration UI for brands connecting their commerce backends — Shopify, BigCommerce, WooCommerce, or custom API. Each brand gets isolated configuration and credentials.
 
-Example response: `{ "status": "ok", "server": "registry-mcp", "version": "1.0.0" }` (version may vary).
+### Usage analytics
 
-**MCP (streamable HTTP)**
+Full dashboard showing tool call volume, adapter usage, connector sync status, error rates, and latency by brand and time period.
 
-```http
-POST https://mcp.commercegateway.io/mcp
-Content-Type: application/json
-Accept: application/json, text/event-stream
-Authorization: Bearer gw_mcp_your_key_here
-```
+### Registry MCP
 
-Use JSON-RPC MCP messages per your client. **`GET /mcp` is not supported** — POST only.
+Your gateway is reachable via the Commerce Registry MCP at `mcp.commercegateway.io` — enabling LLM clients that support MCP to discover and connect to your gateway without manual configuration.
 
-For hosted access, onboarding, and keys, contact **[hello@betterdata.co](mailto:hello@betterdata.co)**.
+### Enterprise features
 
-## Self-hosted vs hosted
+- Okta SSO and SCIM provisioning
+- Stripe billing integration
+- Multi-tenant brand isolation
+- Dedicated support and SLA agreement
 
-Not sure which path fits? See [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted).
+---
+
+## Getting access
+
+The hosted platform is in private beta for select brands and enterprise teams.
+
+[Request access →](mailto:hello@betterdata.co)  
+[View hosted plans →](/docs/hosted/plans)
+
+---
+
+## Open source commitment
+
+The gateway protocol, tool schema, and self-hostable packages are **MIT licensed** and remain open source. The hosted platform is a commercial service built on top.
+
+The same pattern as:
+
+- Nginx (OSS) vs Nginx Plus (commercial)
+- Kubernetes (OSS) vs GKE / EKS / AKS (hosted)
+- Commerce Gateway (OSS) vs Better Data hosted platform (commercial)

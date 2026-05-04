@@ -1,71 +1,117 @@
 ---
 title: "Gateway Console"
-description: "The free, open-source operator UI for self-hosted Commerce Gateway — configure providers, connectors, keys, and registry connection locally."
+description: "The free operator UI for Commerce Gateway — manage providers, connectors, keys, and registry status for your deployed gateway."
 section: "Self-Hosting"
 ---
 
-## What is gateway-console?
+Gateway Console is the free operator UI for Commerce Gateway deployments. It gives developers and admins a single place to see gateway health, configure LLM providers and commerce connectors, manage API keys, and manage registry status — without requiring a Better Data account.
 
-Gateway Console is a free, open-source Next.js operator UI for running Commerce Gateway in a **single-tenant, self-hosted** configuration. No Better Data account is required; configuration and state are local-first.
+<Note>
+**Gateway Console is coming as a hosted free tier.** Better Data will host the console at no cost. You connect your deployed gateway to the hosted console to get full visibility. [Sign up for early access →](https://app.betterdata.co/sign-up?utm_source=commercegateway.io&utm_medium=docs&utm_campaign=console_early_access)
+</Note>
 
-It is the recommended way to configure and manage a self-hosted Commerce Gateway — the same pattern as Loop Engine: the runtime and operator tools are free OSS, while Better Data’s managed offering is the paid tier.
-
-**Package:** `@betterdata/gateway-console`  
-**Source:** [github.com/betterdata/bd-forge-main/apps/gateway-console](https://github.com/betterdata/bd-forge-main/tree/main/apps/gateway-console)  
-**Dev port:** `3012`
+---
 
 ## What it includes
 
-| Page | Path | Purpose |
-|------|------|---------|
-| Dashboard | `/` | Entry point — links to all areas |
-| Status | `/status` | Gateway health, uptime, latency, errors |
-| Providers | `/providers` | Add, test, and remove LLM providers |
-| Connectors | `/connectors` | Add, test, sync, and remove commerce connectors |
-| Keys | `/keys` | Generate and revoke gateway API keys |
-| Registry | `/registry` | Registry connection and discovery search |
-| Federation | `/federation` | Placeholder — federation comes in a later release |
-| Telemetry | `/telemetry` | Opt-in telemetry (off by default) |
+| Panel | Purpose |
+|-------|---------|
+| **Overview** | Entry point — links to all areas, gateway identity |
+| **Status** | Runtime health, uptime, p95 latency, error rate |
+| **Providers** | Add, test, and remove LLM providers (Claude, OpenAI, Grok, Gemini) |
+| **Connectors** | Add, test, sync, and remove commerce connectors (Shopify, WooCommerce, custom) |
+| **Keys** | Generate and revoke gateway API keys — one-time reveal, hash stored |
+| **Registry** | Registry connection status, registration, and discovery search |
+| **Federation** | Coming in v0.2 — peer gateway discovery and trust management |
+| **Telemetry** | Opt-in, privacy-safe telemetry preview (off by default) |
 
-## Quick setup
+---
 
-Gateway Console ships as an app inside the **bd-forge-main** monorepo (it is not a standalone npm install today). From the repo root:
+## Who it's for
 
-```bash
-pnpm install
-pnpm --filter @betterdata/gateway-console dev
-```
+**Developers** who have deployed a self-hosted Commerce Gateway and want to:
 
-Open [http://localhost:3012](http://localhost:3012).
+- Confirm their gateway is healthy and reachable
+- Configure which LLM providers it supports
+- Connect commerce backends (Shopify store, WooCommerce site, custom API)
+- Generate API keys for LLM clients to authenticate
+- Register the gateway in the public Commerce Registry for AI agent discovery
 
-The console persists configuration to **`gateway.config.json`** in the app working directory:
+**Admins** managing a deployed gateway on behalf of a team or brand who want visibility into usage, connector sync status, and registry verification state.
 
-- LLM provider settings
-- Commerce connector settings
-- Hashed API key metadata (`console.keys`)
+---
 
-No database, Prisma, or multi-tenant backend is required.
+## How it works
+
+1. **Deploy your gateway** — self-host on Vercel, Railway, Fly.io, or any Node.js platform using the Commerce Gateway OSS packages
+2. **Connect to the hosted console** — point the console at your gateway's URL
+3. **Configure providers and connectors** — add your LLM API keys and commerce platform credentials through the console UI
+4. **Generate gateway keys** — create API keys for LLM clients (one-time reveal, hash stored — never retained in plain text)
+5. **Register in the registry** — optional but recommended — makes your gateway discoverable to AI agents via the Commerce Registry
+
+---
 
 ## Key generation
 
-The Keys page generates self-hosted gateway keys with a **one-time reveal** — the raw key is shown once, then only a hash is stored locally. This mirrors the key lifecycle model used on the Better Data hosted platform (hashed at rest).
+The Keys panel generates gateway API keys with a **one-time reveal** — the raw key is shown once at creation, then only a SHA-256 hash is stored. This is the same key lifecycle used on the Better Data hosted platform.
 
-## Registry connection (optional)
+Keys use the `bd_gw_live_` prefix for production and `bd_gw_test_` for test mode.
 
-The Registry panel connects your self-hosted gateway to the Commerce Registry for discovery. Registration is optional; you can always give LLM clients your gateway URL directly.
+---
 
-→ [Registry Connection](/docs/self-hosting/registry-connection)  
-→ [Registry Overview](/docs/registry/overview)
+## Registry connection
+
+The Registry panel connects your deployed gateway to the Commerce Registry at `registry.betterdata.co` for discovery. Registration is optional — you can always give LLM clients your gateway URL directly. But a registered gateway:
+
+- Appears in the public directory at registry.betterdata.co
+- Gets a verified status badge after domain verification
+- Can attach GTIN product-line claims
+- Is discoverable by AI agents querying the registry
+
+→ [Registry Overview](/docs/registry/overview)  
+→ [Register your gateway](/docs/registry/setup)
+
+---
+
+## Telemetry
+
+Telemetry is **off by default**. No data is sent unless you explicitly enable it.
+
+**What may be collected if enabled:**
+
+- Gateway console version and runtime (Node.js)
+- Deployment mode (self-hosted)
+- Uptime in seconds
+- Enabled features (registry connected, federation enabled)
+- Aggregate usage counts (24h request count, tool invocation count)
+- Aggregate health signals (p95 latency, error rate)
+
+**What is never collected:**
+
+- Prompts or LLM inputs/outputs
+- Tool input or output payloads
+- API keys, secrets, or credentials
+- Tenant, org, or customer identifiers (names, domains, emails)
+
+---
 
 ## Self-hosted vs Better Data hosted
 
-| | Self-Hosted (gateway-console) | Better Data Hosted |
+| | Gateway Console (free) | Better Data Platform |
 |--|--|--|
 | Cost | Free | Paid — [contact us](/docs/hosted/plans) |
-| Setup | You run the stack | Managed by Better Data |
-| Multi-tenant | No | Yes |
+| Setup | Connect your deployed gateway | Managed by Better Data |
+| Multi-tenant | Single gateway | Yes |
+| Analytics | Local health signals (opt-in) | Full analytics dashboard |
+| Registry | Connect to any registry | Included |
 | SLA | Self-managed | Better Data SLA |
-| Analytics | Local telemetry (opt-in) | Full analytics dashboard |
-| Registry | Optional | Included |
 
 → [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted)
+
+---
+
+## Get early access
+
+Gateway Console hosted is launching as a free tier on Better Data. Sign up to be notified when it's available:
+
+[Sign up for early access →](https://app.betterdata.co/sign-up?utm_source=commercegateway.io&utm_medium=docs&utm_campaign=console_early_access)

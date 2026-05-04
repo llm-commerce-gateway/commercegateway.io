@@ -33,6 +33,16 @@ const config: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/blog/:slug",
+        destination: "https://betterdata.co/blog/:slug",
+        permanent: true,
+      },
+      {
+        source: "/blog",
+        destination: "https://betterdata.co/blog/tags/commerce-gateway",
+        permanent: true,
+      },
+      {
         source: "/docs/registry/registration",
         destination: "/docs/registry/setup",
         permanent: true,

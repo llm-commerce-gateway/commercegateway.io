@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import { DM_Sans, DM_Serif_Display, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/home/Footer";
+import { PostHogProvider } from "@/components/analytics/PostHogProvider";
 import { TopNav } from "@/components/nav/TopNav";
 import "./globals.css";
 import "../styles/tokens.css";
+
+/** Google tag (gtag.js) — GA4 G-Y5R44BVFYX */
+const GA_MEASUREMENT_ID = "G-Y5R44BVFYX";
 
 const displayFont = DM_Serif_Display({
   subsets: ["latin"],
@@ -55,10 +59,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
       <body className="antialiased">
-        <TopNav />
-        {children}
-        <Footer />
-        <GoogleAnalytics gaId="G-Y5R44BVFYX" />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}');
+        `}
+        </Script>
+        <PostHogProvider>
+          <TopNav />
+          {children}
+          <Footer />
+        </PostHogProvider>
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Commerce Registry",
   description:
-    "Discovery and identity for Commerce Gateway — native to the Better Data platform, with an open protocol for self-hosted and OSS deployments.",
+    "Verified commerce identity for AI agents — canonical gateway URLs, domain proof, and optional GTIN product-line claims. Browse the public directory at registry.betterdata.co.",
 };
 
 function TrustBadge({ label }: { label: string }) {
@@ -23,17 +23,34 @@ function TrustBadgeMuted({ label }: { label: string }) {
   );
 }
 
+function BetaCallout() {
+  return (
+    <blockquote className="my-6 rounded-lg border border-emerald-200 bg-emerald-50/80 px-4 py-3 text-sm text-foreground leading-7">
+      <strong>Free during open beta.</strong> Registration in the Better Data public registry at registry.betterdata.co is free. No
+      credit card required.
+    </blockquote>
+  );
+}
+
 export default function RegistryPage() {
   return (
     <main className="px-4 py-12">
       {/* SECTION 1 — Hero */}
       <section className="mx-auto max-w-6xl">
         <h1 className="font-semibold text-4xl">Commerce Registry</h1>
-        <p className="mt-3 max-w-3xl text-base text-muted-foreground leading-7">
-          Discovery and identity for gateways that speak the Commerce Gateway Protocol. In Better Data, registry setup runs
-          in-product alongside gateway configuration — the same workspace, not a separate external registration product. This
-          page documents verification, APIs, and self-hosted options for the open protocol.
-        </p>
+        <div className="mt-4 max-w-3xl space-y-4 text-base text-muted-foreground leading-7">
+          <p>
+            When an AI agent needs to call commerce operations for a brand — find products, check inventory, start a checkout — it
+            needs to know two things: where the gateway is, and whether it can be trusted. The Commerce Registry answers both.
+          </p>
+          <p>
+            Commerce Gateway Registry is the verified commerce identity layer for AI agents. Not a general MCP directory. A
+            commerce-specific trust registry where brands prove domain ownership and attach product-line claims — so any AI agent
+            knows it&apos;s talking to the real store, not a spoofed endpoint.
+          </p>
+          <p className="font-medium text-foreground">Free to register during open beta.</p>
+        </div>
+        <BetaCallout />
         <div className="mt-6 flex flex-wrap gap-4">
           <a
             href="https://app.betterdata.co/sign-up?utm_source=commercegateway.io&utm_medium=site&utm_campaign=registry_native"
@@ -49,33 +66,68 @@ export default function RegistryPage() {
           >
             View setup docs
           </Link>
-          <Link
-            href="/registry#directory"
+          <a
+            href="https://registry.betterdata.co"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-lg border border-zinc-200 bg-background px-5 py-2.5 text-sm font-medium text-foreground hover:bg-zinc-50"
           >
             Browse the directory
-          </Link>
+          </a>
         </div>
       </section>
 
-      {/* SECTION 2 — What the registry is */}
+      {/* SECTION 2 — Discovery first */}
+      <section className="mx-auto mt-14 max-w-6xl">
+        <h2 className="font-semibold text-2xl">Who&apos;s in the registry</h2>
+        <p className="mt-3 text-muted-foreground text-sm leading-7">
+          Browse verified commerce gateways at{" "}
+          <a
+            href="https://registry.betterdata.co"
+            className="text-emerald-600 underline underline-offset-4 hover:text-emerald-700"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            registry.betterdata.co
+          </a>
+          .
+        </p>
+        <p className="mt-4">
+          <a
+            href="https://registry.betterdata.co"
+            className="inline-flex items-center text-emerald-600 text-sm font-medium underline underline-offset-4 hover:text-emerald-700"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Browse the directory →
+          </a>
+        </p>
+        <p className="mt-4 text-muted-foreground text-sm leading-7">Registered gateways show:</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-muted-foreground text-sm leading-7">
+          <li>Verified domain (proven ownership via DNS or hosted token)</li>
+          <li>Commerce capabilities (product search, cart, orders, returns)</li>
+          <li>GTIN product-line claims (optional — associates specific product lines with the gateway)</li>
+          <li>Protocol version and endpoint URL</li>
+          <li>Registration date and last verified timestamp</li>
+        </ul>
+      </section>
+
+      {/* SECTION 3 — Two registration options + trust between */}
       <section className="mx-auto mt-14 max-w-6xl">
         <h2 className="font-semibold text-2xl">Discovery with proof</h2>
-        <div className="mt-4 grid gap-8 md:grid-cols-2">
-          <div className="text-muted-foreground text-sm leading-7">
-            <p>
-              The registry is not a walled garden. It implements the open Commerce Registry Protocol — any compliant registry
-              deployment can interoperate. Better Data operates a hosted public registry. You can self-host your own.
-            </p>
-            <p className="mt-4">
-              The key distinction: a gateway listed in the registry is <strong className="text-foreground">verified</strong>.
-              Verification means you have proven control of the brand domain where the gateway runs — not just that you published
-              a file.
-            </p>
-          </div>
+        <div className="mt-4 max-w-3xl text-muted-foreground text-sm leading-7">
+          <p>
+            The registry is not a walled garden. It implements the open Commerce Registry Protocol — any compliant registry
+            deployment can interoperate. Better Data operates a hosted public registry. You can self-host your own.
+          </p>
+          <p className="mt-4">
+            The key distinction: a gateway listed in the registry is <strong className="text-foreground">verified</strong>.
+            Verification means you have proven control of the brand domain where the gateway runs — not just that you published a
+            file.
+          </p>
         </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 flex flex-col gap-6">
           <article className="rounded-xl border bg-background p-6 shadow-sm">
             <div className="flex items-center gap-2">
               <h3 className="font-semibold text-lg">Verified registration</h3>
@@ -96,6 +148,38 @@ export default function RegistryPage() {
               </Link>
             </p>
           </article>
+
+          <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-6">
+            <p className="font-semibold text-foreground text-sm">Why verification matters to AI agents</p>
+            <p className="mt-2 text-muted-foreground text-sm leading-7">
+              Unverified gateways (<code className="font-mono text-[12px] text-foreground">.well-known</code> only) are discoverable
+              but flagged as lower trust. Verified gateways have proven domain control — agents and resolvers treat these as
+              authoritative for that brand&apos;s commerce operations. For production use, always complete full verification.
+            </p>
+            <div className="mt-4 overflow-x-auto rounded-lg border bg-background">
+              <table className="min-w-[520px] w-full border-collapse text-left text-sm">
+                <thead className="bg-muted/40">
+                  <tr className="border-b">
+                    <th className="px-3 py-2 font-medium">Trust tier</th>
+                    <th className="px-3 py-2 font-medium">How it works</th>
+                    <th className="px-3 py-2 font-medium">Agent treatment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="px-3 py-2 text-muted-foreground">✅ Verified</td>
+                    <td className="px-3 py-2 text-muted-foreground">Domain proof + registry listing</td>
+                    <td className="px-3 py-2 text-muted-foreground">Authoritative — treated as the brand&apos;s canonical gateway</td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-2 text-muted-foreground">⚠️ Unverified</td>
+                    <td className="px-3 py-2 text-muted-foreground">.well-known file only</td>
+                    <td className="px-3 py-2 text-muted-foreground">Discoverable but not authoritative</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <article className="rounded-xl border bg-background p-6 shadow-sm">
             <div className="flex items-center gap-2">
@@ -118,7 +202,9 @@ export default function RegistryPage() {
         </div>
       </section>
 
-      {/* SECTION 3 — Two verification methods */}
+      <BetaCallout />
+
+      {/* SECTION 4 — Two verification methods */}
       <section className="mx-auto mt-14 max-w-6xl">
         <h2 className="font-semibold text-2xl">Proving domain control</h2>
         <p className="mt-3 max-w-3xl text-muted-foreground text-sm leading-7">
@@ -161,7 +247,37 @@ export default function RegistryPage() {
         </div>
       </section>
 
-      {/* SECTION 4 — GTIN claims */}
+      {/* SECTION 5 — Why agents use the registry */}
+      <section className="mx-auto mt-14 max-w-6xl">
+        <h2 className="font-semibold text-2xl">Why agents use the registry</h2>
+        <p className="mt-3 max-w-3xl text-muted-foreground text-sm leading-7">
+          Without a verified registry, an AI agent connecting to commerce tools has no way to confirm it&apos;s reached the
+          legitimate gateway for a brand. The registry provides:
+        </p>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground text-sm leading-7">
+          <li>
+            <strong className="text-foreground">Canonical endpoint resolution</strong> — look up a brand domain, get back the
+            verified gateway URL
+          </li>
+          <li>
+            <strong className="text-foreground">Trust signal</strong> — verified status means someone proved domain control, not just
+            published a file
+          </li>
+          <li>
+            <strong className="text-foreground">Capability discovery</strong> — agents see what tools are available before
+            connecting (product search, cart, orders, returns, specific categories)
+          </li>
+          <li>
+            <strong className="text-foreground">Product-line scope</strong> — GTIN claims let agents know which brands and product
+            lines a gateway serves
+          </li>
+        </ul>
+        <p className="mt-4 text-muted-foreground text-sm leading-7">
+          This is the same trust model DNS provides for web browsing — but for AI-accessible commerce infrastructure.
+        </p>
+      </section>
+
+      {/* SECTION 6 — GTIN claims */}
       <section className="mx-auto mt-14 max-w-6xl rounded-xl border bg-background p-6">
         <h2 className="font-semibold text-2xl">Attach product-line proof</h2>
         <p className="mt-3 max-w-3xl text-muted-foreground text-sm leading-7">
@@ -175,20 +291,33 @@ export default function RegistryPage() {
         </p>
       </section>
 
-      {/* SECTION 5 — Which registry to use */}
+      {/* SECTION 7 — Which registry to use */}
       <section className="mx-auto mt-14 max-w-6xl">
-        <h2 className="font-semibold text-2xl">Self-hosted or public registry</h2>
+        <h2 className="font-semibold text-2xl">Choose your registry</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           <article className="rounded-xl border bg-background p-6 shadow-sm">
-            <h3 className="font-semibold text-lg">Better Data public registry</h3>
-            <p className="mt-3 text-muted-foreground text-sm leading-6">The default hosted registry. Free to register during open beta.</p>
-            <p className="mt-4 font-mono text-xs text-foreground break-all">
-              REGISTRY_URL: https://registry.betterdata.co
+            <h3 className="font-semibold text-lg">Better Data public registry — free during open beta</h3>
+            <p className="mt-3 text-muted-foreground text-sm leading-6">
+              The default hosted registry for the Commerce Gateway ecosystem. Register your gateway, complete domain verification,
+              and appear in the public directory at registry.betterdata.co.
             </p>
-            <p className="mt-4">
+            <p className="mt-3 text-muted-foreground text-sm leading-6">
+              Free to register. No hosting or Better Data account required to list. A Better Data account unlocks the hosted
+              console, analytics, and managed gateway infrastructure.
+            </p>
+            <p className="mt-4 font-mono text-xs text-foreground break-all">REGISTRY_URL: https://registry.betterdata.co</p>
+            <p className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
               <Link href="/docs/registry/setup" className="text-emerald-600 text-sm underline underline-offset-4 hover:text-emerald-700">
                 Register now →
               </Link>
+              <a
+                href="https://app.betterdata.co/sign-up?utm_source=commercegateway.io&utm_medium=site&utm_campaign=registry"
+                className="text-emerald-600 text-sm underline underline-offset-4 hover:text-emerald-700"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open in Better Data →
+              </a>
             </p>
           </article>
           <article className="rounded-xl border bg-background p-6 shadow-sm">
@@ -223,7 +352,7 @@ export default function RegistryPage() {
         </div>
       </section>
 
-      {/* SECTION 6 — Quick reference + directory anchor */}
+      {/* SECTION 8 — Quick reference + directory anchor */}
       <section id="directory" className="mx-auto mt-14 max-w-6xl scroll-mt-24">
         <h2 className="font-semibold text-2xl">At a glance</h2>
         <p className="mt-3 text-muted-foreground text-sm leading-7">

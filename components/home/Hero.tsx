@@ -42,7 +42,7 @@ export function Hero() {
             className="mono mt-5 flex items-center justify-between rounded-md border px-3 py-2 text-sm"
             style={{ background: "var(--color-code-bg)", color: "var(--color-primary-mid)", borderColor: "var(--color-border-dark)" }}
           >
-            <span>npm install @commerce-gateway/sdk</span>
+            <span>npm install @commerce-gateway/sdk @anthropic-ai/sdk</span>
             <span aria-hidden>Copy</span>
           </div>
         </div>
@@ -50,15 +50,19 @@ export function Hero() {
           className="overflow-x-auto rounded-lg p-5 text-sm"
           style={{ background: "var(--color-code-bg)", color: "var(--color-code-text)" }}
         >
-{`// Claude calls the gateway like any other tool
-const result = await anthropic.messages.create({
-  model: "claude-opus-4-6",
-  tools: await gateway.getTools(["product.search", "cart.add"]),
-  messages: [{ role: "user", content: "Find running shoes under $100" }]
+{`import { AnthropicAdapter } from "@commerce-gateway/sdk/adapters";
+
+const adapter = new AnthropicAdapter({
+  apiKey: process.env.ANTHROPIC_API_KEY!,
+  tools: ["search_products", "get_product_details"],
 });
 
-// Gateway routes to your commerce platform
-// Returns structured data back to the LLM`}
+const result = await adapter.handleRequest({
+  model: "claude-sonnet-4-6",
+  messages: [{ role: "user", content: "Find running shoes under $100" }],
+});
+
+// Same AnthropicAdapter + handleRequest pattern as the quick start`}
         </pre>
       </div>
     </section>

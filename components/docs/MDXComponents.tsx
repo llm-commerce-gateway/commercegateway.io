@@ -37,6 +37,10 @@ function HostedBadge() {
   );
 }
 
+function Note({ children }: { children: React.ReactNode }) {
+  return <Callout variant="tip">{children}</Callout>;
+}
+
 export const MDXComponents: Components = {
   pre: ({ children }) => <>{children}</>,
   code: ({ children, className }) => {
@@ -65,9 +69,10 @@ export const MDXComponents: Components = {
   th: ({ children }) => <th className="border px-3 py-2 text-left" style={{ borderColor: "var(--color-border)" }}>{children}</th>,
   td: ({ children }) => <td className="border px-3 py-2" style={{ borderColor: "var(--color-border)" }}>{children}</td>,
   Callout,
+  Note,
   APITable,
   SelfHostBadge,
   HostedBadge,
 };
 
-export { Callout, APITable, SelfHostBadge, HostedBadge };
+export { Callout, Note, APITable, SelfHostBadge, HostedBadge };
