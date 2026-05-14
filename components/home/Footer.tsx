@@ -1,4 +1,9 @@
 import Link from "next/link";
+import {
+  BETTERDATA_CCO_URL,
+  BETTERDATA_OPEN_INFRA_URL,
+  ECOSYSTEM_STRIP,
+} from "@/lib/betterdata-ecosystem";
 
 export function Footer() {
   return (
@@ -44,6 +49,14 @@ export function Footer() {
           <p className="mono" style={{ color: "var(--color-ink)" }}>
             Better Data
           </p>
+          <a href={BETTERDATA_CCO_URL} target="_blank" rel="noopener noreferrer">
+            Commerce Chain Optimization (hosted)
+          </a>
+          <br />
+          <a href={BETTERDATA_OPEN_INFRA_URL} target="_blank" rel="noopener noreferrer">
+            Open operational infrastructure hub
+          </a>
+          <br />
           <a href="https://www.betterdata.co/trust" target="_blank" rel="noopener noreferrer">
             Trust Center
           </a>
@@ -73,11 +86,14 @@ export function Footer() {
       </div>
 
       <div
-        className="container flex flex-col gap-3 border-t py-4 text-xs"
+        className="container border-t py-4 text-xs"
         style={{ borderColor: "var(--color-border)", color: "var(--color-ink-tertiary)" }}
       >
+        <p className="mx-auto max-w-3xl text-center leading-relaxed md:text-left" style={{ marginBottom: "0.75rem" }}>
+          {ECOSYSTEM_STRIP}
+        </p>
         <p className="text-center md:text-left">
-          MIT Licensed · © Commerce Gateway Contributors ·{" "}
+          Apache-2.0 Licensed · © Commerce Gateway Contributors ·{" "}
           <a href="mailto:conduct@commercegateway.io">conduct@commercegateway.io</a>
         </p>
         <p className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2 text-center">
