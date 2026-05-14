@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BETTERDATA_CCO_URL, GATEWAY_ROLE_LINE } from "@/lib/betterdata-ecosystem";
 
 export function Hero() {
   return (
@@ -17,8 +18,11 @@ export function Hero() {
           </h1>
           <p className="mt-4 max-w-[600px]" style={{ color: "var(--color-ink-secondary)", fontSize: "var(--text-lg)" }}>
             Commerce Gateway is an open protocol and self-hostable server that lets any AI agent — Claude, GPT-4o, Grok,
-            Gemini — call commerce operations through one consistent tool interface. Pair it with Commerce Registry for
+            Gemini — call typed commerce tools and data through one consistent tool interface. Pair it with Commerce Registry for
             discovery; both are first-class in the Better Data workspace (self-host and OSS paths use the same protocol).
+          </p>
+          <p className="mt-4 max-w-[600px] text-sm leading-relaxed" style={{ color: "var(--color-ink-secondary)" }}>
+            {GATEWAY_ROLE_LINE}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -36,6 +40,15 @@ export function Hero() {
               style={{ borderColor: "var(--color-primary)", color: "var(--color-primary)" }}
             >
               View on GitHub
+            </a>
+            <a
+              href={BETTERDATA_CCO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono rounded border px-5 py-3"
+              style={{ borderColor: "var(--color-border-dark)", color: "var(--color-ink)" }}
+            >
+              See Commerce Chain Optimization
             </a>
           </div>
           <div
