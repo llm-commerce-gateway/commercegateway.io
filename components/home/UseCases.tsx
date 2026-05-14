@@ -29,9 +29,10 @@ export function UseCases() {
 
       <section className="border-b py-16">
         <div className="container">
-          <h2 className="text-3xl">Commerce operations, fully typed</h2>
-          <p className="mt-2 text-sm" style={{ color: "var(--color-ink-secondary)" }}>
-            The Commerce Gateway tool schema covers the full commerce lifecycle.
+          <h2 className="text-3xl">Commerce tooling, fully typed</h2>
+          <p className="mt-2 max-w-3xl text-sm" style={{ color: "var(--color-ink-secondary)" }}>
+            The Commerce Gateway tool schema covers discovery, cart, checkout, orders, and returns across the commerce
+            lifecycle.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <ToolGroup
@@ -54,10 +55,10 @@ export function UseCases() {
             <article className="rounded-lg border p-6" style={{ borderColor: "var(--color-border)" }}>
               <h3 className="text-xl">Self-Hosted</h3>
               <p className="mt-2 text-sm" style={{ color: "var(--color-ink-secondary)" }}>
-                Full control. MIT licensed. Run anywhere Node.js runs.
+                Full control. Apache-2.0 licensed. Run anywhere Node.js runs.
               </p>
               <ul className="mt-4 space-y-2 text-sm">
-                <li>✓ MIT licensed</li>
+                <li>✓ Apache-2.0 licensed</li>
                 <li>✓ Docker image available</li>
                 <li>✓ No usage limits</li>
                 <li>✓ No phone home</li>
