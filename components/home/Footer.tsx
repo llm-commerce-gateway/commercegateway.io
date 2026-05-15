@@ -1,9 +1,17 @@
 import Link from "next/link";
+import { Fragment } from "react";
 import {
   BETTERDATA_CCO_URL,
   BETTERDATA_OPEN_INFRA_URL,
   ECOSYSTEM_STRIP,
 } from "@/lib/betterdata-ecosystem";
+import {
+  BETTER_DATA_DOCS_FOOTER_SECONDARY_LINKS,
+  BETTER_DATA_ECOSYSTEM,
+  BETTER_DATA_LEGAL_FOOTER_LINKS,
+  BETTER_DATA_SUPPORT_FOOTER,
+} from "@betterdata/site-links";
+import { BetterDataFooterSocialIcons } from "@betterdata/site-links/social-icons";
 
 export function Footer() {
   return (
@@ -57,15 +65,15 @@ export function Footer() {
             Open operational infrastructure hub
           </a>
           <br />
-          <a href="https://www.betterdata.co/trust" target="_blank" rel="noopener noreferrer">
+          <a href={BETTER_DATA_ECOSYSTEM.trustCenter} target="_blank" rel="noopener noreferrer">
             Trust Center
           </a>
           <br />
-          <a href="https://betterdata.co" target="_blank" rel="noopener noreferrer">
+          <a href={BETTER_DATA_ECOSYSTEM.marketingSite} target="_blank" rel="noopener noreferrer">
             Created by Better Data
           </a>
           <br />
-          <a href="https://betterdata.co/docs" target="_blank" rel="noopener noreferrer">
+          <a href={BETTER_DATA_ECOSYSTEM.docsBrowse} target="_blank" rel="noopener noreferrer">
             Platform docs
           </a>
           <br />
@@ -86,6 +94,39 @@ export function Footer() {
       </div>
 
       <div
+        className="container flex flex-col gap-4 border-t py-6 md:flex-row md:flex-wrap md:items-center md:justify-between"
+        style={{ borderColor: "var(--color-border)" }}
+      >
+        <a
+          href={BETTER_DATA_SUPPORT_FOOTER.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm hover:underline"
+          style={{ color: "var(--color-ink-secondary)" }}
+        >
+          {BETTER_DATA_SUPPORT_FOOTER.label}
+        </a>
+        <BetterDataFooterSocialIcons
+          navClassName="flex flex-wrap gap-2 md:justify-end"
+          linkClassName="inline-flex h-10 w-10 items-center justify-center rounded-lg text-[var(--color-ink-tertiary)] transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-ink)]"
+        />
+        <div className="flex w-full flex-wrap gap-x-4 gap-y-2 text-sm md:w-auto md:justify-end">
+          {BETTER_DATA_DOCS_FOOTER_SECONDARY_LINKS.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+              style={{ color: "var(--color-primary)" }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div
         className="container border-t py-4 text-xs"
         style={{ borderColor: "var(--color-border)", color: "var(--color-ink-tertiary)" }}
       >
@@ -97,55 +138,20 @@ export function Footer() {
           <a href="mailto:conduct@commercegateway.io">conduct@commercegateway.io</a>
         </p>
         <p className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2 text-center">
-          <a
-            href="https://www.betterdata.co/trust/security"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "inherit", textDecoration: "none" }}
-            className="hover:underline"
-          >
-            Security
-          </a>
-          <span aria-hidden="true"> · </span>
-          <a
-            href="https://www.betterdata.co/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "inherit", textDecoration: "none" }}
-            className="hover:underline"
-          >
-            Privacy Policy
-          </a>
-          <span aria-hidden="true"> · </span>
-          <a
-            href="https://www.betterdata.co/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "inherit", textDecoration: "none" }}
-            className="hover:underline"
-          >
-            Terms of Service
-          </a>
-          <span aria-hidden="true"> · </span>
-          <a
-            href="https://www.betterdata.co/cookies"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "inherit", textDecoration: "none" }}
-            className="hover:underline"
-          >
-            Cookie Notice
-          </a>
-          <span aria-hidden="true"> · </span>
-          <a
-            href="https://www.betterdata.co/trust/open-source"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "inherit", textDecoration: "none" }}
-            className="hover:underline"
-          >
-            Open Source disclosures
-          </a>
+          {BETTER_DATA_LEGAL_FOOTER_LINKS.map((item, i) => (
+            <Fragment key={item.href}>
+              {i > 0 ? <span aria-hidden="true"> · </span> : null}
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "inherit", textDecoration: "none" }}
+                className="hover:underline"
+              >
+                {item.label}
+              </a>
+            </Fragment>
+          ))}
         </p>
       </div>
     </footer>
