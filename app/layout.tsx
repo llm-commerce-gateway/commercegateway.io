@@ -38,6 +38,9 @@ export const metadata: Metadata = {
   title: { default: "Commerce Gateway", template: "%s · Commerce Gateway" },
   description:
     "Open gateway for LLM commerce integrations. Connect any AI agent to any commerce platform with a single tool schema.",
+  authors: [{ name: "Better Data", url: "https://betterdata.co" }],
+  creator: "Better Data",
+  publisher: "Better Data",
   openGraph: {
     type: "website",
     url: "https://commercegateway.io",

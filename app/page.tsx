@@ -9,10 +9,17 @@ export default function Home() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "@id": "https://betterdata.co/#organization",
+        name: "Better Data",
+        url: "https://betterdata.co",
+      },
+      {
         "@type": "WebSite",
         "@id": "https://commercegateway.io/#website",
         url: "https://commercegateway.io",
         name: "Commerce Gateway",
+        publisher: { "@id": "https://betterdata.co/#organization" },
       },
       {
         "@type": "SoftwareApplication",
@@ -20,6 +27,7 @@ export default function Home() {
         name: "Commerce Gateway",
         applicationCategory: "DeveloperApplication",
         operatingSystem: "Node.js",
+        author: { "@id": "https://betterdata.co/#organization" },
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       },
     ],

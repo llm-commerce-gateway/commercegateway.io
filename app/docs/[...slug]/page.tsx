@@ -66,7 +66,8 @@ export default async function DocsSlugPage({ params }: PageProps) {
     description: doc.description,
     url: `https://commercegateway.io/docs/${doc.slugPath}`,
     about: "Commerce Gateway",
-    author: { "@type": "Organization", name: "Commerce Gateway Contributors" },
+    author: { "@type": "Organization", name: "Better Data", url: "https://betterdata.co" },
+    publisher: { "@type": "Organization", name: "Better Data", url: "https://betterdata.co" },
   };
 
   return (
