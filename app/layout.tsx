@@ -9,9 +9,6 @@ import { DocsSearchModalHost } from "@/components/docs/DocsSearchModalHost";
 import "./globals.css";
 import "../styles/tokens.css";
 
-/** Google tag (gtag.js) — GA4 G-Y5R44BVFYX */
-const GA_MEASUREMENT_ID = "G-Y5R44BVFYX";
-
 const displayFont = DM_Serif_Display({
   subsets: ["latin"],
   weight: "400",
