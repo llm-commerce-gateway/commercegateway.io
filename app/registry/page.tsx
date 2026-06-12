@@ -53,12 +53,12 @@ export default function RegistryPage() {
         <BetaCallout />
         <div className="mt-6 flex flex-wrap gap-4">
           <a
-            href="https://app.betterdata.co/sign-up?utm_source=commercegateway.io&utm_medium=site&utm_campaign=registry_native"
+            href="https://app.commercegateway.io?utm_source=commercegateway.io&utm_medium=site&utm_campaign=registry_native"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-lg border border-emerald-600 bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-700"
           >
-            Open in Better Data
+            Register A Gateway
           </a>
           <Link
             href="/docs/registry/setup"
@@ -311,12 +311,12 @@ export default function RegistryPage() {
                 Register now →
               </Link>
               <a
-                href="https://app.betterdata.co/sign-up?utm_source=commercegateway.io&utm_medium=site&utm_campaign=registry"
+                href="https://app.commercegateway.io?utm_source=commercegateway.io&utm_medium=site&utm_campaign=registry"
                 className="text-emerald-600 text-sm underline underline-offset-4 hover:text-emerald-700"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Open in Better Data →
+                Register A Gateway →
               </a>
             </p>
           </article>
