@@ -14,7 +14,7 @@ export function HowItWorks() {
     },
     {
       title: "Add governance",
-      body: "Layer Loop Engine on actions executed through the gateway for approvals, guards, and audit — governance as a control layer, not a standalone bot.",
+      body: "Layer Boss Loops on actions executed through the gateway for approvals, guards, and audit — governance as a control layer, not a standalone bot.",
     },
   ];
 

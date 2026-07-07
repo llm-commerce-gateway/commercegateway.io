@@ -14,11 +14,11 @@ export function WorksWith() {
       cta: "How registry fits →",
     },
     {
-      name: "Loop Engine",
+      name: "Boss Loops",
       role: "Governance & control",
-      body: "Policy, guards, and audit on actions that flow through the gateway. Loop Engine is the control layer — not a parallel automation product.",
+      body: "Policy, guards, and audit on actions that flow through the gateway. Boss Loops is the control layer — not a parallel automation product.",
       href: "https://loopengine.io",
-      cta: "Loop Engine →",
+      cta: "Boss Loops →",
       external: true,
     },
     {
@@ -76,7 +76,7 @@ export function WorksWith() {
         </div>
         <p className="mt-8 text-xs" style={{ color: "var(--color-ink-muted)" }}>
           Developer path: (1) run the gateway → (2) connect tools → (3) build on the demo experience → (4) add governance with
-          Loop Engine.
+          Boss Loops.
         </p>
       </div>
     </section>

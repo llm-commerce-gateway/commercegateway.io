@@ -78,7 +78,7 @@ export function Footer() {
           </a>
           <br />
           <a href="https://loopengine.io" target="_blank" rel="noopener noreferrer">
-            Loop Engine
+            Boss Loops
           </a>
           <br />
           <a href="https://commercechain.io" target="_blank" rel="noopener noreferrer">

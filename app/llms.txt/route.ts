@@ -21,7 +21,7 @@ platforms through a single, consistent tool schema.
 - GitHub: https://github.com/commercegateway/commerce-gateway
 - npm: https://www.npmjs.com/org/commerce-gateway
 - Created by: Better Data (https://betterdata.co)
-- Loop Engine integration: https://loopengine.io
+- Boss Loops integration: https://loopengine.io
 `;
 
 export function GET() {
