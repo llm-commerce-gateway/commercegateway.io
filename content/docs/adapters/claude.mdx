@@ -17,7 +17,7 @@ Claude returns `tool_use` content blocks. `AnthropicAdapter` formats tool defini
 ## Basic usage (multi-turn loop)
 
 ```ts
-import { AnthropicAdapter } from "@betterdata/commerce-gateway/adapters";
+import { AnthropicAdapter } from "@commercegateway/commerce-gateway/adapters";
 
 const adapter = new AnthropicAdapter({
   apiKey: process.env.ANTHROPIC_API_KEY!,
@@ -60,4 +60,4 @@ Claude may request several tools before final text output. The adapter manages t
 
 ## Commerce Registry
 
-To resolve brands, GTINs, or categories to gateway endpoints before tool calls, use the [Commerce Registry Protocol](/docs/registry/overview) (`@betterdata/commerce-registry-protocol`) and the HTTP resolution API, or `createRegistryClient` from `@betterdata/commerce-gateway` — see [.well-known File](/docs/registry/well-known).
+To resolve brands, GTINs, or categories to gateway endpoints before tool calls, use the [Commerce Registry Protocol](/docs/registry/overview) (`@betterdata/commerce-registry-protocol`) and the HTTP resolution API, or `createRegistryClient` from `@commercegateway/commerce-gateway` — see [.well-known File](/docs/registry/well-known).
