@@ -22,10 +22,21 @@ MCP tool names include search_products, get_product_details, add_to_cart,
 create_order, shop_merchant, discover_merchants. Well-known capability ids
 (product.search, cart.add) are a separate protocol surface.
 
+Use cases: merchant-owned first-party apps; one integration across Shopify
+Storefront, WooCommerce, and BigCommerce (behavior is not identical);
+registry discovery plus per-merchant execution (no unified cart); ISVs
+embedding headless commerce; agencies reusing connectors across clients.
+Model adapters are a horizontal benefit. Boss Loops checkout governance is
+not a shipped OSS capability. Hosted is qualified pilots, not self-serve GA.
+
 ## Links
 
 - Docs: https://commercegateway.io/docs
+- Use cases: https://commercegateway.io/docs/getting-started/use-cases
+- Connector capabilities: https://commercegateway.io/docs/getting-started/connector-capabilities
 - Shopify coexistence: https://commercegateway.io/docs/getting-started/shopify-and-ucp
+- For agencies: https://commercegateway.io/docs/getting-started/for-agencies
+- For software vendors: https://commercegateway.io/docs/getting-started/for-software-vendors
 - GitHub: https://github.com/commercegateway/commerce-gateway
 - npm: https://www.npmjs.com/org/commercegateway
 - Created by: Better Data (https://betterdata.co)

@@ -1,0 +1,41 @@
+---
+title: "Connector capabilities"
+description: "What each OSS connector actually supports. Normalized MCP names do not mean identical backend behavior."
+section: "Getting Started"
+---
+
+Connectors in `@commercegateway/commerce-gateway-connectors` (`1.0.0-rc.2`). This is **not** Shopify UCP (`/api/ucp/mcp`) or Shop MCP.
+
+Quote partners from this page. Same MCP **names** do not mean the same **behavior**.
+
+## All three: catalog
+
+`search_products`, `get_product_details`, and buyer-safe availability on product/variant fields work on Shopify Storefront GraphQL, WooCommerce REST `wc/v3`, and BigCommerce REST v3.
+
+`get_recommendations` is a **heuristic** (search / similar type) on all three — not a merchandising engine.
+
+## Cart
+
+- **Shopify Storefront:** Cart API.
+- **WooCommerce:** in-memory **session cart** (Woo has no native cart API).
+- **BigCommerce:** Cart API.
+
+## `create_order`
+
+- **Shopify Storefront:** **checkout handoff** (`checkoutCreate` + checkout URL). Not a paid completed order.
+- **WooCommerce:** REST order (`set_paid: false` unless you take payment separately).
+- **BigCommerce:** REST order.
+
+## Get order by id / number
+
+- **Shopify Storefront:** **throws**. Admin API required.
+- **WooCommerce / BigCommerce:** REST orders.
+
+## Explicitly not supported
+
+- Unified multi-merchant cart, split settlement, centralized reservation.
+- Shopify UCP / Shop MCP / Catalog MCP.
+- Shopify Admin connector.
+- ERP / WMS / PO / shipment / demand-forecast tools on these storefront connectors.
+
+Canonical file in the OSS repo: `packages/commerce-gateway-connectors/CONNECTOR_CAPABILITY.md`.

@@ -16,7 +16,7 @@ export function WorksWith() {
     {
       name: "Boss Loops",
       role: "Governance & control",
-      body: "Policy, guards, and audit on actions that flow through the gateway. Boss Loops is the control layer — not a parallel automation product.",
+      body: "Optional expansion for high-value actions (approvals, audit). Not wired as a mandatory gate on every Gateway create_order today.",
       href: "https://loopengine.io",
       cta: "Boss Loops →",
       external: true,
@@ -39,8 +39,8 @@ export function WorksWith() {
         </p>
         <h2 className="mt-2 text-3xl">Gateway is one layer in a connected stack</h2>
         <p className="mt-3 max-w-[720px] text-sm" style={{ color: "var(--color-ink-secondary)" }}>
-          Self-host the gateway, use Better Data hosted, or both — registry and setup stay inside a unified platform
-          experience. External endpoints (MCP URLs, connectors) come after you configure the workspace.
+          Self-host the OSS gateway. Registry is the discovery plane. Boss Loops and Commerce Chain are platform
+          expansions when you need authority or operational context — not shipped checkout governance on the OSS path.
         </p>
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {items.map((item) => (
@@ -75,8 +75,7 @@ export function WorksWith() {
           ))}
         </div>
         <p className="mt-8 text-xs" style={{ color: "var(--color-ink-muted)" }}>
-          Developer path: (1) run the gateway → (2) connect tools → (3) build on the demo experience → (4) add governance with
-          Boss Loops.
+          Developer path: install → attach a storefront → expose MCP. Add hosted ops or Loops only when you have that need.
         </p>
       </div>
     </section>

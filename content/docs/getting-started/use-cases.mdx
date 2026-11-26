@@ -1,0 +1,46 @@
+---
+title: "Use cases"
+description: "What Commerce Gateway is for: merchant-owned apps, multi-platform connectors, federation, ISVs, and agencies — not a shopping-assistant product."
+section: "Getting Started"
+---
+
+Commerce Gateway is **open infrastructure**. It is not a shopping concierge SKU and not Shopify UCP.
+
+- **Merchant-owned experiences** — brands and retailers. Self-hosted OSS. ([below](#1-merchant-owned-commerce-experiences))
+- **Build once across platforms** — developers and agencies. Self-hosted OSS. ([below](#2-build-once-across-commerce-platforms))
+- **Federated multi-merchant** — multi-brand and collectives. OSS registry protocol. ([below](#3-multiple-merchants-and-storefronts))
+- **Embed in your software** — ISVs and vertical SaaS. OSS or hosted pilot. ([For software vendors](/docs/getting-started/for-software-vendors))
+- **Agency client portfolios** — digital agencies. OSS or hosted pilot. ([For agencies](/docs/getting-started/for-agencies))
+
+**Horizontal:** keep commerce connectivity stable while you change **Anthropic, OpenAI, Grok, or Gemini**. Not every model behaves the same.
+
+**Not a Gateway OSS use case:** Boss Loops “governed checkout.” High-value approvals (POs, discounts, replenishment) are a Better Data platform expansion.
+
+Native Shopify UCP / Shop MCP can **coexist**. See [Shopify, UCP, and this gateway](/docs/getting-started/shopify-and-ucp).
+
+## 1. Merchant-owned commerce experiences
+
+Power product search, details, availability, and **supported** cart or checkout flows on a site, mobile app, or custom agent you host.
+
+- Control the application, merchandising logic, and customer relationship — not merely “avoid Meta.”
+- Self-hosting does **not** by itself give full customer attribution (identity, session, order-source tracking).
+- Shopify `create_order` is **checkout handoff**, not a completed Storefront order. See the [capability matrix](/docs/getting-started/connector-capabilities).
+
+## 2. Build once across commerce platforms
+
+One normalized MCP interface across **supported** Shopify Storefront, WooCommerce, and BigCommerce operations.
+
+Do not assume identical auth, variants, carts, or orders. The value is reusable agent logic **where the backend supports the tool**, plus one connector maintenance cycle.
+
+This story holds even if every platform ships native UCP tomorrow — those channels serve consumer AI surfaces; this gateway serves **your** application.
+
+## 3. Multiple merchants and storefronts
+
+[Registry MCP](/docs/registry/setup) discovers merchants. [Gateway MCP](/docs/getting-started/quick-start) executes **per merchant**.
+
+Not included: a single cart across merchants, consolidated payments, split settlements, or centralized inventory reservation.
+
+## Next
+
+- [Quick start](/docs/getting-started/quick-start)
+- [Request a managed pilot](mailto:hello@betterdata.co?subject=Commerce%20Gateway%20managed%20pilot) (manually provisioned; not self-serve GA)

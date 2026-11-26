@@ -14,12 +14,13 @@ export function Hero() {
               maxWidth: 700,
             }}
           >
-            Every LLM. Every commerce platform. One tool schema.
+            Every commerce system. Any agent. Your control.
           </h1>
           <p className="mt-4 max-w-[600px]" style={{ color: "var(--color-ink-secondary)", fontSize: "var(--text-lg)" }}>
-            Commerce Gateway is an open protocol and self-hostable server that lets any AI agent — Claude, GPT-4o, Grok,
-            Gemini — call typed commerce tools and data through one consistent tool interface. Pair it with Commerce Registry for
-            discovery; both are first-class in the Better Data workspace (self-host and OSS paths use the same protocol).
+            Open infrastructure for merchant-owned commerce applications. Connect agents to{" "}
+            <strong>Shopify Storefront</strong>, <strong>WooCommerce</strong>, and <strong>BigCommerce</strong> through a
+            normalized MCP interface — with Anthropic, OpenAI, Grok, and Gemini adapters. Not Shopify UCP or Shop MCP;
+            those native channels can coexist.
           </p>
           <p className="mt-4 max-w-[600px] text-sm leading-relaxed" style={{ color: "var(--color-ink-secondary)" }}>
             {GATEWAY_ROLE_LINE}

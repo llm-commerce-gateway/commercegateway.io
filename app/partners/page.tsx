@@ -63,14 +63,26 @@ export default function PartnersPage() {
       <section className="mx-auto max-w-6xl">
         <h1 className="font-semibold text-4xl">Partners</h1>
         <p className="mt-3 max-w-3xl text-base text-muted-foreground">
-          LLM providers, commerce backends, and ecosystem integrations certified to work with Commerce Gateway.
+          LLM adapters and storefront connectors. Agencies and software vendors: see{" "}
+          <Link href="/docs/getting-started/for-agencies" className="underline underline-offset-4">
+            for agencies
+          </Link>{" "}
+          and{" "}
+          <Link href="/docs/getting-started/for-software-vendors" className="underline underline-offset-4">
+            for software vendors
+          </Link>
+          , or{" "}
+          <a href="mailto:hello@betterdata.co?subject=Commerce%20Gateway%20managed%20pilot" className="underline underline-offset-4">
+            request a managed pilot
+          </a>
+          .
         </p>
       </section>
 
       <section className="mx-auto mt-10 max-w-6xl">
         <h2 className="font-semibold text-2xl">LLM Providers</h2>
         <p className="mt-3 max-w-3xl text-muted-foreground text-sm leading-6">
-          Certified adapters for every major AI provider. Any LLM, any commerce backend - that&apos;s the Commerce Gateway promise.
+          Adapters for Anthropic, OpenAI, Grok, and Gemini. Tool-calling behavior is not identical across providers.
         </p>
         <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
           {aiProviderPartners.map((partner) => (

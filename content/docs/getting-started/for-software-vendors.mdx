@@ -1,0 +1,31 @@
+---
+title: "For software vendors"
+description: "Embed Commerce Gateway as headless infrastructure in your own product. You keep the UX and the customer relationship."
+section: "Getting Started"
+---
+
+Independent software vendors, vertical SaaS, AI assistants, comparison and recommendation products, and digital-experience platforms can use Commerce Gateway as a **headless commerce layer**.
+
+You typically **do not** want Better Data’s hosted Shopping Agent. You want MCP + connectors behind **your** application.
+
+## Why it is a commercial motion
+
+One vendor relationship can attach many merchants. Better Data does not have to sell each merchant independently.
+
+## What you run
+
+```bash
+npm install @commercegateway/commerce-gateway @commercegateway/commerce-gateway-connectors
+```
+
+Programmatic MCP: `createGatewayMCPServer` + `ShopifyConnector` / `WooCommerceConnector` / `BigCommerceConnector` `.getBackends()`. See [Quick start](/docs/getting-started/quick-start) and the [capability matrix](/docs/getting-started/connector-capabilities).
+
+## Hosted
+
+If you do not want to operate Node for every customer environment, Better Data can **manually provision a paid pilot**. This is not self-serve GA. Isolation, metering, and SLA are agreed per pilot — they are not published as generally available features.
+
+[Request a managed pilot](mailto:hello@betterdata.co?subject=ISV%20Commerce%20Gateway%20pilot)
+
+## Coexistence
+
+If your merchants already use Shopify UCP / Shop MCP on Meta, Google, or Shop, **leave those channels in place**. This gateway is for **your** product’s first-party experience. [Shopify, UCP, and this gateway](/docs/getting-started/shopify-and-ucp).
