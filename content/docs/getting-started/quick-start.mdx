@@ -1,64 +1,78 @@
 ---
 title: "Quick Start"
-description: "Install Commerce Gateway and make your first LLM tool call in under 5 minutes."
+description: "Install the published Commerce Gateway packages and expose search_products over MCP."
 section: "Getting Started"
 ---
 
 > **Self-hosted or hosted?**  
-> This quick start focuses on **self-hosted** integration patterns (npm packages and local gateway). If you want the **Better Data managed platform** (multi-tenant, SLA, hosted Registry MCP), see [Hosted Overview](/docs/hosted/overview) and [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted).
+> This quick start uses **published npm packages** (`1.0.0-rc.2` as of this writing). Hosted Gateway at [gateway.betterdata.co](https://gateway.betterdata.co) is a **managed runtime, not self-serve GA**. See [Hosted Overview](/docs/hosted/overview) and [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted).
+>
+> Commerce Gateway is **not** Shopify UCP or Shop MCP. Keep native Shopify AI channels where you use them — [Shopify, UCP, and this gateway](/docs/getting-started/shopify-and-ucp).
 
-## 1) Install
-
-```bash
-npm install @commerce-gateway/sdk @anthropic-ai/sdk
-# or
-pnpm add @commerce-gateway/sdk @anthropic-ai/sdk
-```
-
-## 2) Start the gateway server
+There is no `@commerce-gateway/sdk` or `@commerce-gateway/server` package. Install from the `@commercegateway` org:
 
 ```bash
-npx @commerce-gateway/server start
-# or with Docker
-docker run -p 3100:3100 commercegateway/server
+npm install @commercegateway/commerce-gateway
+# optional storefront connectors
+npm install @commercegateway/commerce-gateway-connectors
 ```
 
-## 3) Connect your product catalog
+`npx @commercegateway/commerce-gateway-mcp` is the **CLI** that loads `gateway.config.json` and starts stdio MCP with demo backends. Programmatic MCP uses `createGatewayMCPServer` from `@commercegateway/commerce-gateway/mcp`.
+
+## 1) MCP server with a connector
 
 ```ts
-// gateway.config.ts
-export default {
-  catalog: {
-    baseUrl: "https://api.your-store.com",
-    apiKey: process.env.CATALOG_API_KEY,
-  },
-};
-```
+import { createGatewayMCPServer } from "@commercegateway/commerce-gateway/mcp";
+import { ShopifyConnector } from "@commercegateway/commerce-gateway-connectors/shopify";
 
-## 4) Make a tool call from Claude
-
-```ts
-import { AnthropicAdapter } from "@commerce-gateway/sdk/adapters";
-
-const adapter = new AnthropicAdapter({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-  tools: ["search_products", "get_product_details"],
+const shopify = new ShopifyConnector({
+  domain: "my-shop.myshopify.com",
+  accessToken: process.env.SHOPIFY_STOREFRONT_TOKEN!,
+  apiVersion: "2024-01",
 });
 
-const result = await adapter.handleRequest({
-  model: "claude-sonnet-4-6",
-  messages: [{ role: "user", content: "Find running shoes under $100" }],
+const server = createGatewayMCPServer({
+  slug: "my-shop",
+  brandName: "My Shop",
+  endpoint: "https://example.com/mcp",
+  protocol: "mcp",
+  capabilities: { catalog_search: true, inventory: "real_time" },
+  backends: shopify.getBackends(),
 });
 
-console.log(result.choices[0]?.message.content);
+server.start(); // stdio transport (Claude Desktop / Cursor)
 ```
 
-## 5) What just happened
+This Shopify path is the **Storefront API**, not `https://{shop}/api/ucp/mcp`. Order lookup is not available on Storefront.
 
-The gateway translated Claude's tool format, routed the selected tool call to your product API, normalized the response payload, and returned it in Claude-compatible structure.
+Equivalent connectors: [Shopify Storefront](/docs/getting-started/shopify-storefront) · [WooCommerce](/docs/getting-started/woocommerce) · [BigCommerce](/docs/getting-started/bigcommerce)
+
+## 2) Claude Desktop via the MCP CLI (demo backends)
+
+```bash
+npx @commercegateway/commerce-gateway-mcp
+```
+
+With no config file this uses **demo** backends (not your store). Optional: copy `gateway.config.example.json` to `gateway.config.json` (see the [MCP package readme](https://www.npmjs.com/package/@commercegateway/commerce-gateway-mcp)).
+
+## 3) Call an MCP tool
+
+Runtime MCP names (not well-known capability ids such as `product.search`):
+
+```json
+{
+  "name": "search_products",
+  "arguments": {
+    "query": "wireless headphones under $100"
+  }
+}
+```
+
+LLM adapters (`AnthropicAdapter`, `OpenAIAdapter`, …) are exported from `@commercegateway/commerce-gateway/adapters` (or `/anthropic`, `/openai`, `/grok`, `/google`).
 
 ## Next steps
 
 - [Core Concepts](/docs/getting-started/concepts)
-- [Tool Schema Overview](/docs/tool-schema/overview)
-- [Claude Adapter docs](/docs/adapters/claude)
+- [Tool names vs capability ids](/docs/tool-schema/overview)
+- [Claude adapter](/docs/adapters/claude)
+- [Shopify, UCP, and this gateway](/docs/getting-started/shopify-and-ucp)

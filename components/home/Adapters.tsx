@@ -27,9 +27,9 @@ export function Adapters() {
   return (
     <section id="adapters" className="border-b py-16">
       <div className="container">
-        <h2 className="text-3xl">Works with every major AI platform</h2>
+        <h2 className="text-3xl">Supported model adapters</h2>
         <p className="mt-2 text-sm" style={{ color: "var(--color-ink-secondary)" }}>
-          Adapters handle tool schema translation automatically.
+          Schema translation for Anthropic, OpenAI, Grok, and Gemini. Tool-calling behavior still differs by provider.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {adapters.map((adapter) => (

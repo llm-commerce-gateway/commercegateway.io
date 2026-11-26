@@ -1,10 +1,25 @@
 ---
 title: "Roadmap"
-description: "Upcoming milestones for Commerce Gateway OSS."
+description: "What is true today vs gated work for Commerce Gateway OSS."
 section: "Resources"
 ---
 
-- Complete adapter parity docs for all supported models
-- Expand tool schema coverage and versioning rules
-- Publish docker/k8s production deployment references
-- Promote hosted beta to general availability
+## Shipped (document, don’t over-claim)
+
+- npm prerelease `1.0.0-rc.2`: `@commercegateway/commerce-gateway`, `-mcp`, `-connectors`, `@commercegateway/registry-mcp`
+- Shopify **Storefront** GraphQL, WooCommerce REST, BigCommerce REST connectors
+- MCP tools `search_products`, `get_product_details`, `add_to_cart`, … plus registry discovery
+- `/.well-known/commerce-gateway.json` (our protocol)
+
+## Not shipped — do not advertise
+
+- UCP / `/.well-known/ucp` / Shopify `{shop}/api/ucp/mcp` compatibility
+- Published Docker image `commercegateway/server`
+- `@commerce-gateway/sdk` (never published)
+- Hosted self-serve GA (runtime exists; commercial motion is private beta)
+
+## Gated next (see internal Track A/H/I)
+
+- Partner-validated UCP binding (aliases and discovery only after conformance)
+- First-party container image after a release owner authorizes publish
+- Hosted self-serve provision, keys, metering, agency tenancy

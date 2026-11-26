@@ -4,24 +4,11 @@ description: "Run Commerce Gateway in Docker for local or production self-hosted
 section: "Self-Hosting"
 ---
 
-## Quick run
+There is **no published `commercegateway/server` image** on Docker Hub as of this writing. Self-host with Node and the npm packages:
 
 ```bash
-docker run --rm -p 3100:3100 \
-  -e COMMERCE_GATEWAY_PORT=3100 \
-  -e OPENAI_API_KEY=$OPENAI_API_KEY \
-  commercegateway/server
+npm install @commercegateway/commerce-gateway @commercegateway/commerce-gateway-mcp
+npx @commercegateway/commerce-gateway-mcp
 ```
 
-## Docker Compose sample
-
-```yaml
-services:
-  gateway:
-    image: commercegateway/server
-    ports:
-      - "3100:3100"
-    environment:
-      COMMERCE_GATEWAY_PORT: 3100
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-```
+Programmatic MCP: `createGatewayMCPServer` from `@commercegateway/commerce-gateway/mcp` (see [Quick Start](/docs/getting-started/quick-start)). Publish a first-party image only after a release owner authorizes it.

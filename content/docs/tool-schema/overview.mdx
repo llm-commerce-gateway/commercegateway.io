@@ -8,12 +8,32 @@ section: "Tool Schema"
 
 The schema is TypeScript-first and centered on `UniversalToolDefinition` contracts. Adapters emit vendor-ready formats (Anthropic tool_use, OpenAI function calling, Gemini function declarations) from one source.
 
+## MCP tool names vs capability ids
+
+**MCP tools** (what Claude Desktop / `createGatewayMCPServer` expose) use snake_case names in code:
+
+| MCP tool | Well-known / protocol capability id |
+| --- | --- |
+| `search_products` | `product.search` |
+| `get_product_details` | `product.detail` |
+| `check_availability` | `product.availability` |
+| `get_recommendations` | `product.recommendations` |
+| `add_to_cart` | `cart.add` |
+| `create_order` | `cart.checkout` / order create |
+| `shop_merchant` | federation (not a well-known product.* id) |
+| `discover_merchants` | federation |
+
+Getting-started examples use **MCP names**. `/.well-known/commerce-gateway.json` and registry registration still use **capability ids**. They are the same operations with two labels — not two products.
+
+UCP names (`search_catalog`, `create_cart`) are **not** implemented. See [Shopify, UCP, and this gateway](/docs/getting-started/shopify-and-ucp).
+
 ## Operation categories
 
-- `product.*` discovery and detail
-- `cart.*` cart session and checkout actions
-- `order.*` order lifecycle
-- `returns.*` return initiation/tracking
+- Product discovery: `search_products`, `get_product_details`, `check_availability`, `get_recommendations`
+- Cart and checkout: `add_to_cart`, `create_order`
+- Federation: `shop_merchant`, `discover_merchants`
+
+Proposed SCM tools (`get_shipment_status`, `get_purchase_order_status`, `get_trace_events`, `get_demand_forecast`) are placeholders until adapters exist. They are not Shopify Storefront features.
 
 ## Using getTools by context
 

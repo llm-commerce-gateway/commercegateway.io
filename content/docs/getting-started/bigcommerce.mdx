@@ -1,0 +1,50 @@
+---
+title: "BigCommerce"
+description: "Connect a BigCommerce store via the REST API v3."
+section: "Getting Started"
+---
+
+BigCommerce has no native Shopify-style UCP endpoint. This connector is how a first-party agent talks to a BigCommerce store through Commerce Gateway MCP.
+
+## Install
+
+```bash
+npm install @commercegateway/commerce-gateway @commercegateway/commerce-gateway-connectors
+```
+
+Current npm prerelease: `1.0.0-rc.2`.
+
+## Configure
+
+Store hash and OAuth access token:
+
+```ts
+import { createGatewayMCPServer } from "@commercegateway/commerce-gateway/mcp";
+import { BigCommerceConnector } from "@commercegateway/commerce-gateway-connectors/bigcommerce";
+
+const bigcommerce = new BigCommerceConnector({
+  storeHash: process.env.BIGCOMMERCE_STORE_HASH!,
+  accessToken: process.env.BIGCOMMERCE_ACCESS_TOKEN!,
+  apiVersion: "v3",
+});
+
+const server = createGatewayMCPServer({
+  slug: "your-store",
+  brandName: "Your Store",
+  endpoint: "https://example.com/mcp",
+  protocol: "mcp",
+  capabilities: { catalog_search: true },
+  backends: bigcommerce.getBackends(),
+});
+
+server.start();
+```
+
+## Try a tool
+
+```json
+{
+  "name": "search_products",
+  "arguments": { "query": "trail running shoes", "limit": 5 }
+}
+```

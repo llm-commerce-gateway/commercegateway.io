@@ -1,20 +1,20 @@
 export function HowItWorks() {
   const steps = [
     {
-      title: "Run the gateway",
-      body: "Self-host or use Better Data hosted — same protocol, one unified system. Configure connectors and auth in your workspace; external MCP endpoints come after setup.",
+      title: "Install the packages",
+      body: "npm install @commercegateway/commerce-gateway and the connectors package (1.0.0-rc.2). Self-host on Node, or ask Better Data for a qualified hosted pilot.",
     },
     {
-      title: "Connect tools",
-      body: "Wire Shopify, custom APIs, or any HTTP backend. The gateway normalizes tool schemas so Claude, GPT-4o, Grok, and Gemini all speak one interface.",
+      title: "Attach a storefront",
+      body: "Shopify Storefront, WooCommerce REST, or BigCommerce REST via getBackends(). Capabilities are normalized; behavior is not identical across platforms.",
     },
     {
-      title: "Build on the demo experience",
-      body: "The Commerce Demo is a developer accelerator — a reference app, not a separate product. Use it to validate flows before you ship your own UI.",
+      title: "Expose MCP tools",
+      body: "createGatewayMCPServer (or the MCP CLI with demo backends) so your agent can call search_products and related tools. Registry MCP is optional discovery, not execution.",
     },
     {
-      title: "Add governance",
-      body: "Layer Boss Loops on actions executed through the gateway for approvals, guards, and audit — governance as a control layer, not a standalone bot.",
+      title: "Expand when you need ops",
+      body: "Managed hosting, merchandising intelligence, and Boss Loops approvals are Better Data platform expansions — not required to run the OSS gateway.",
     },
   ];
 
@@ -23,8 +23,8 @@ export function HowItWorks() {
       <div className="container">
         <h2 className="text-3xl">Developer path</h2>
         <p className="mt-2 max-w-[720px] text-sm" style={{ color: "var(--color-ink-secondary)" }}>
-          Commerce Registry (discovery) is a native platform capability — configure it in Better Data alongside the gateway;
-          docs here describe the open protocol for self-hosted and OSS deployments.
+          Registry MCP discovers merchants. Gateway MCP executes per storefront. Hosted Cloud is a separately provisioned
+          pilot — not self-serve GA.
         </p>
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (

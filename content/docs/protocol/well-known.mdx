@@ -10,6 +10,8 @@ The protocol specifies a discovery file at:
 
 `https://{domain}/.well-known/commerce-gateway.json`
 
+This is **not** `/.well-known/ucp`. Capability strings in the file are protocol ids (`product.search`), not MCP tool names (`search_products`).
+
 Served over **HTTPS**, **HTTP 200**, **`Content-Type: application/json`**.
 
 Trust semantics: discovery via this file alone is **unverified** until the operator completes **registry registration** and **domain verification**. Verified listings are reflected in registry resolution responses.

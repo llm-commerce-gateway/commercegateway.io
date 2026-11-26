@@ -14,12 +14,13 @@ export function Hero() {
               maxWidth: 700,
             }}
           >
-            Every LLM. Every commerce platform. One tool schema.
+            Every commerce system. Any agent. Your control.
           </h1>
           <p className="mt-4 max-w-[600px]" style={{ color: "var(--color-ink-secondary)", fontSize: "var(--text-lg)" }}>
-            Commerce Gateway is an open protocol and self-hostable server that lets any AI agent — Claude, GPT-4o, Grok,
-            Gemini — call typed commerce tools and data through one consistent tool interface. Pair it with Commerce Registry for
-            discovery; both are first-class in the Better Data workspace (self-host and OSS paths use the same protocol).
+            Open infrastructure for merchant-owned commerce applications. Connect agents to{" "}
+            <strong>Shopify Storefront</strong>, <strong>WooCommerce</strong>, and <strong>BigCommerce</strong> through a
+            normalized MCP interface — with Anthropic, OpenAI, Grok, and Gemini adapters. Not Shopify UCP or Shop MCP;
+            those native channels can coexist.
           </p>
           <p className="mt-4 max-w-[600px] text-sm leading-relaxed" style={{ color: "var(--color-ink-secondary)" }}>
             {GATEWAY_ROLE_LINE}
@@ -55,7 +56,7 @@ export function Hero() {
             className="mono mt-5 flex items-center justify-between rounded-md border px-3 py-2 text-sm"
             style={{ background: "var(--color-code-bg)", color: "var(--color-primary-mid)", borderColor: "var(--color-border-dark)" }}
           >
-            <span>npm install @commerce-gateway/sdk @anthropic-ai/sdk</span>
+            <span>npm install @commercegateway/commerce-gateway</span>
             <span aria-hidden>Copy</span>
           </div>
         </div>
@@ -63,19 +64,23 @@ export function Hero() {
           className="overflow-x-auto rounded-lg p-5 text-sm"
           style={{ background: "var(--color-code-bg)", color: "var(--color-code-text)" }}
         >
-{`import { AnthropicAdapter } from "@commerce-gateway/sdk/adapters";
+{`import { createGatewayMCPServer } from "@commercegateway/commerce-gateway/mcp";
+import { ShopifyConnector } from "@commercegateway/commerce-gateway-connectors/shopify";
 
-const adapter = new AnthropicAdapter({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-  tools: ["search_products", "get_product_details"],
+const shopify = new ShopifyConnector({
+  domain: "my-shop.myshopify.com",
+  accessToken: process.env.SHOPIFY_STOREFRONT_TOKEN!,
 });
 
-const result = await adapter.handleRequest({
-  model: "claude-sonnet-4-6",
-  messages: [{ role: "user", content: "Find running shoes under $100" }],
+const server = createGatewayMCPServer({
+  slug: "my-shop",
+  brandName: "My Shop",
+  endpoint: "https://example.com/mcp",
+  protocol: "mcp",
+  capabilities: { catalog_search: true },
+  backends: shopify.getBackends(),
 });
-
-// Same AnthropicAdapter + handleRequest pattern as the quick start`}
+server.start();`}
         </pre>
       </div>
     </section>

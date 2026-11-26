@@ -16,7 +16,7 @@ Each model vendor uses a different function/tool protocol. Commerce Gateway ship
 
 The self-hosted server handles routing, auth, and response normalization. It is OSS and Apache-2.0 licensed.
 
-The hosted Better Data runtime adds multi-tenancy, analytics, and merchant-facing portal surfaces.
+The hosted Better Data runtime is a **qualified pilot** offering (not self-serve GA). Multi-tenancy, analytics, and SLA are not published as generally available.
 
 ## OSS / hosted boundary
 
@@ -32,7 +32,7 @@ This follows the same pattern as open protocols in infrastructure:
 
 ## Relationship to Boss Loops
 
-Commerce Gateway handles commerce data and actions. Boss Loops governs policy/state transitions around AI decisions. Together, Boss Loops can call Commerce Gateway as a controlled tool source.
+Commerce Gateway handles commerce data and actions. Boss Loops is an **optional** control layer for high-value decisions. OSS Gateway checkout (`create_order`) is **not** automatically wrapped in an enforceable Loops approval.
 
 **Naming:** Boss Loops publishes and resolves **loop definitions** through a **loop catalog** (hosted HTTP service and `@loop-engine/registry-client`). That is separate from the **Commerce Gateway Registry**, which implements the Commerce Registry Protocol for gateway discovery and domain verification.
 

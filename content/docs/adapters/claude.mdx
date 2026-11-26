@@ -1,13 +1,13 @@
 ---
 title: "Claude Adapter"
-description: "Use Commerce Gateway with Claude (claude-opus-4-6, claude-sonnet-4-6) via the @commerce-gateway/adapter-anthropic package."
+description: "Use Commerce Gateway with Claude via AnthropicAdapter in @commercegateway/commerce-gateway."
 section: "LLM Adapters"
 ---
 
 ## Installation
 
 ```bash
-npm install @commerce-gateway/sdk @anthropic-ai/sdk
+npm install @commercegateway/commerce-gateway @anthropic-ai/sdk
 ```
 
 ## How Claude `tool_use` works
@@ -55,7 +55,7 @@ for await (const event of adapter.handleStreamingRequest({ messages })) {
 
 Claude may request several tools before final text output. The adapter manages this tool loop until terminal output or max iteration limit.
 
-- npm: `@commerce-gateway/adapter-anthropic`
+- npm: `@commercegateway/commerce-gateway` (`/anthropic` or `/adapters`)
 - Related: [Boss Loops + Commerce Gateway](/docs/getting-started/concepts#relationship-to-boss-loops)
 
 ## Commerce Registry

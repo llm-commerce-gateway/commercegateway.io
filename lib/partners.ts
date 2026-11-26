@@ -18,8 +18,8 @@ export const aiProviderPartners: Partner[] = [
     description:
       "Claude as a Commerce Gateway AI actor - natural language commerce queries with structured product responses.",
     integrationType: "provider",
-    docsPath: "/docs/adapters/anthropic",
-    adapterPackage: "@commerce-gateway/adapter-anthropic",
+    docsPath: "/docs/adapters/claude",
+    adapterPackage: "@commercegateway/commerce-gateway",
     certificationStatus: "certified",
   },
   {
@@ -30,7 +30,7 @@ export const aiProviderPartners: Partner[] = [
       "GPT-4o for LLM-native commerce operations - product search, comparison, and cart management via natural language.",
     integrationType: "provider",
     docsPath: "/docs/adapters/openai",
-    adapterPackage: "@commerce-gateway/adapter-openai",
+    adapterPackage: "@commercegateway/commerce-gateway",
     certificationStatus: "certified",
   },
   {
@@ -40,7 +40,7 @@ export const aiProviderPartners: Partner[] = [
     description: "Grok 3 for commerce intelligence via xAI's API.",
     integrationType: "provider",
     docsPath: "/docs/adapters/grok",
-    adapterPackage: "@commerce-gateway/adapter-grok",
+    adapterPackage: "@commercegateway/commerce-gateway",
     certificationStatus: "certified",
   },
   {
@@ -51,7 +51,7 @@ export const aiProviderPartners: Partner[] = [
       "Gemini for multi-modal commerce - product image analysis and natural language catalog search.",
     integrationType: "provider",
     docsPath: "/docs/adapters/gemini",
-    adapterPackage: "@commerce-gateway/adapter-gemini",
+    adapterPackage: "@commercegateway/commerce-gateway",
     certificationStatus: "certified",
   },
 ];
@@ -62,10 +62,10 @@ export const commerceBackendPartners: Partner[] = [
     slug: "shopify",
     logoPath: "/logos/shopify.svg",
     description:
-      "Connect any LLM to Shopify - product catalog, cart, checkout, and order management via Commerce Gateway.",
+      "Shopify Storefront API connector for first-party agents. Does not replace Shopify UCP or Shop MCP.",
     integrationType: "backend",
-    docsPath: "/docs/backends/shopify",
-    adapterPackage: "@commerce-gateway/backend-shopify",
+    docsPath: "/docs/getting-started/shopify-storefront",
+    adapterPackage: "@commercegateway/commerce-gateway-connectors",
     certificationStatus: "certified",
   },
   {
@@ -75,8 +75,8 @@ export const commerceBackendPartners: Partner[] = [
     description:
       "BigCommerce catalog and storefront operations for LLM agents.",
     integrationType: "backend",
-    docsPath: "/docs/backends/bigcommerce",
-    adapterPackage: "@commerce-gateway/backend-bigcommerce",
+    docsPath: "/docs/getting-started/bigcommerce",
+    adapterPackage: "@commercegateway/commerce-gateway-connectors",
     certificationStatus: "certified",
   },
   {
@@ -86,8 +86,8 @@ export const commerceBackendPartners: Partner[] = [
     description:
       "WordPress + WooCommerce as a commerce backend for AI agents.",
     integrationType: "backend",
-    docsPath: "/docs/backends/woocommerce",
-    adapterPackage: "@commerce-gateway/backend-woocommerce",
+    docsPath: "/docs/getting-started/woocommerce",
+    adapterPackage: "@commercegateway/commerce-gateway-connectors",
     certificationStatus: "community",
   },
 ];

@@ -1,13 +1,13 @@
 ---
 title: "Hosted Platform Overview"
-description: "Better Data hosts Commerce Gateway for teams that want managed infrastructure, multi-tenancy, analytics, and SLA."
+description: "Better Data can host Commerce Gateway for qualified pilots. Not self-serve GA."
 section: "Hosted Platform"
 ---
 
-Commerce Gateway is open source and self-hostable. Better Data also operates a **hosted platform** for teams that want managed infrastructure, multi-tenancy, governed operational flows, and SLA.
+Commerce Gateway is open source and self-hostable. Better Data also operates a **hosted runtime** for **qualified, manually provisioned pilots** (agencies, ISVs, multi-brand operators).
 
 <Note>
-**Private beta.** The hosted platform is available to select brands and enterprise teams. [Request access →](mailto:hello@betterdata.co)
+**Private beta.** The hosted runtime (`gateway.betterdata.co`) is **deployed** for select teams. It is **not** self-serve GA: you cannot independently provision, meter, and pay without Better Data. [Request access →](mailto:hello@betterdata.co)
 </Note>
 
 ---
@@ -17,52 +17,48 @@ Commerce Gateway is open source and self-hostable. Better Data also operates a *
 | | Self-Hosted (free) | Better Data Hosted |
 |--|--|--|
 | Gateway runtime | You deploy and manage | Managed by Better Data |
-| Gateway Console | Free hosted UI — coming soon | Included |
-| Commerce Registry | Free listing at registry.betterdata.co | Included |
-| LLM adapters | All four (OSS) | All four + managed updates |
-| Multi-tenant | No | Yes — brand isolation |
-| Analytics | Opt-in local telemetry | Full usage dashboard |
-| SLA | Self-managed | 99.9% uptime target |
-| Support | Community (GitHub, Discord) | Enterprise / commercial |
-| Cost | Free | Contact us |
+| Operator UI | gateway-console (self-host) | As agreed in the pilot |
+| Commerce Registry | Optional / self-hosted | As agreed in the pilot |
+| LLM adapters | Anthropic, OpenAI, Grok, Gemini | Same adapters, operated by us |
+| Multi-tenant isolation | Single-tenant OSS | **Target for GA — verify per pilot; not a public GA claim** |
+| Usage metering | Opt-in OSS telemetry (off by default) | **Target — not published as GA** |
+| SLA | Self-managed | **Per agreement only — not a published 99.9% GA** |
+| Support | GitHub | As agreed in the pilot |
+| Cost | Free | Contact us (discovery bands, not SKUs) |
 
 → [Self-Host or Hosted?](/docs/getting-started/self-host-or-hosted)  
 → [Hosted Plans](/docs/hosted/plans)
 
 ---
 
-## What the hosted platform includes
+## What a hosted pilot can include
+
+Treat the items below as **negotiated**, except the managed Node runtime itself.
 
 ### Managed gateway infrastructure
 
-Better Data runs Commerce Gateway on managed infrastructure with automatic updates, SSL, and uptime monitoring. No servers to manage, no deployments to coordinate.
+Better Data can run the Commerce Gateway process so the customer does not operate Node. Scope (updates, TLS, monitoring) is per pilot.
 
-### Gateway Console
+### Console, registry, brand portal
 
-The operator UI for managing providers, connectors, keys, and registry status. Free tier available for self-hosted deployments. Fully managed on the hosted platform.
-
-### Commerce Registry
-
-Your gateway is listed and verified in the public Commerce Registry at `registry.betterdata.co`. Domain verification and GTIN product-line claims are managed through the platform.
-
-### Brand portal
-
-Merchant-facing configuration UI for brands connecting their commerce backends — Shopify, BigCommerce, WooCommerce, or custom API. Each brand gets isolated configuration and credentials.
+Operator UI, public registry listing, and merchant-facing config **may** be part of a given pilot. Do not assume they ship with every environment.
 
 ### Usage analytics
 
-Full dashboard showing tool call volume, adapter usage, connector sync status, error rates, and latency by brand and time period.
+**Not a GA claim.** Dashboards and metering may be part of a specific pilot. Do not sell “full usage analytics” as a generally available hosted feature.
 
 ### Registry MCP
 
 Your gateway is reachable via the Commerce Registry MCP at `mcp.commercegateway.io` — enabling LLM clients that support MCP to discover and connect to your gateway without manual configuration.
 
-### Enterprise features
+### Enterprise features (targets, not GA)
 
-- Okta SSO and SCIM provisioning
-- Stripe billing integration
-- Multi-tenant brand isolation
-- Dedicated support and SLA agreement
+- Agency hierarchy / delegated admin
+- Customer-facing metering and consolidated billing
+- Enterprise SSO
+- Contractual SLA
+
+Do not put these in a partner SOW unless the pilot agreement lists them.
 
 ---
 

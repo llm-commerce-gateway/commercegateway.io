@@ -1,0 +1,46 @@
+---
+title: "Shopify, UCP, and this gateway"
+description: "How Commerce Gateway coexists with Shopify UCP, Shop MCP, and Catalog MCP. We do not replace those channels."
+section: "Getting Started"
+---
+
+Shopify, Google, and Meta standardized shopper discovery and checkout on the **Universal Commerce Protocol (UCP)**. Shopify stores expose `https://{shop}/api/ucp/mcp`. Shop MCP and Catalog MCP are Shopify’s hosted agent paths.
+
+**Commerce Gateway does not implement UCP today.** Do not advertise this runtime as UCP-compatible, as a Shop MCP replacement, or as `https://{shop}/api/ucp/mcp`.
+
+## What to keep native
+
+Use Shopify’s own UCP / Shop MCP / Catalog MCP (and Meta/Google surfaces that consume them) so shoppers can discover and buy **inside those platforms**. We do not intercept those channels.
+
+## What this gateway is for
+
+A **self-hosted MCP** (`@commercegateway/commerce-gateway-mcp`) plus HTTP connectors:
+
+- **First-party agents** you host (site, app, Claude Desktop, Cursor, custom OpenAI/Claude deployments)
+- **Multi-platform catalogs** — Shopify **Storefront API**, WooCommerce REST, BigCommerce REST, or a custom `GatewayBackends` implementation
+- **Registry discovery** — `@commercegateway/registry-mcp` and `/.well-known/commerce-gateway.json` (our protocol, not `/.well-known/ucp`)
+
+## Two MCP planes (ours)
+
+| Plane | Package | Job |
+| --- | --- | --- |
+| Discover | `@commercegateway/registry-mcp` | Merchant / `@shop` resolution |
+| Execute | `@commercegateway/commerce-gateway-mcp` | Commerce tools (`search_products`, cart, …) |
+
+Hosted execution, when you use Better Data Cloud, is [gateway.betterdata.co](https://gateway.betterdata.co) — deployed, **not** documented as self-serve GA.
+
+## Shopify Storefront vs UCP
+
+| | Shopify UCP / Shop MCP | This gateway’s Shopify connector |
+| --- | --- | --- |
+| Endpoint | `{shop}/api/ucp/mcp`, Shop MCP | Your process; Storefront GraphQL |
+| Audience | Platform AI shoppers | Agents you operate |
+| Tools | `search_catalog`, `create_cart`, … | `search_products`, `add_to_cart`, … |
+| Orders | UCP/Shop checkout path | Storefront checkout; **no** Admin order lookup |
+
+## UCP on our roadmap
+
+A UCP binding (tool aliases, discovery, auth) is a **gated** interop investment. Public `/.well-known/ucp` and “UCP compatible” claims stay frozen until an independent client validates a documented subset.
+
+→ [Quick Start](/docs/getting-started/quick-start)  
+→ [Shopify Storefront connector](/docs/getting-started/shopify-storefront)
