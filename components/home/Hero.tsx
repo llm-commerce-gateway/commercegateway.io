@@ -55,7 +55,7 @@ export function Hero() {
             className="mono mt-5 flex items-center justify-between rounded-md border px-3 py-2 text-sm"
             style={{ background: "var(--color-code-bg)", color: "var(--color-primary-mid)", borderColor: "var(--color-border-dark)" }}
           >
-            <span>npm install @commerce-gateway/sdk @anthropic-ai/sdk</span>
+            <span>npm install @commercegateway/commerce-gateway</span>
             <span aria-hidden>Copy</span>
           </div>
         </div>
@@ -63,19 +63,23 @@ export function Hero() {
           className="overflow-x-auto rounded-lg p-5 text-sm"
           style={{ background: "var(--color-code-bg)", color: "var(--color-code-text)" }}
         >
-{`import { AnthropicAdapter } from "@commerce-gateway/sdk/adapters";
+{`import { createGatewayMCPServer } from "@commercegateway/commerce-gateway/mcp";
+import { ShopifyConnector } from "@commercegateway/commerce-gateway-connectors/shopify";
 
-const adapter = new AnthropicAdapter({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
-  tools: ["search_products", "get_product_details"],
+const shopify = new ShopifyConnector({
+  domain: "my-shop.myshopify.com",
+  accessToken: process.env.SHOPIFY_STOREFRONT_TOKEN!,
 });
 
-const result = await adapter.handleRequest({
-  model: "claude-sonnet-4-6",
-  messages: [{ role: "user", content: "Find running shoes under $100" }],
+const server = createGatewayMCPServer({
+  slug: "my-shop",
+  brandName: "My Shop",
+  endpoint: "https://example.com/mcp",
+  protocol: "mcp",
+  capabilities: { catalog_search: true },
+  backends: shopify.getBackends(),
 });
-
-// Same AnthropicAdapter + handleRequest pattern as the quick start`}
+server.start();`}
         </pre>
       </div>
     </section>

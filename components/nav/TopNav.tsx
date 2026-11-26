@@ -155,7 +155,7 @@ export function TopNav() {
 
         <div className="flex items-center gap-2">
           <a
-            href="https://www.npmjs.com/package/@commerce-gateway/sdk"
+            href="https://www.npmjs.com/package/@commercegateway/commerce-gateway"
             target="_blank"
             rel="noreferrer"
             className="mono hidden rounded-full border px-3 py-1 md:inline-flex"
@@ -166,7 +166,7 @@ export function TopNav() {
               fontSize: "var(--text-xs)",
             }}
           >
-            @commerce-gateway/sdk
+            @commercegateway/commerce-gateway
           </a>
           <Link
             href="/docs/getting-started/quick-start"

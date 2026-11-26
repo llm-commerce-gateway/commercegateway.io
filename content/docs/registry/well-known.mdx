@@ -10,6 +10,8 @@ Publishing `/.well-known/commerce-gateway.json` on your domain makes your gatewa
 
 **Important:** The spec explicitly treats well-known discovery as lower trust than verified registry registration. If you want your gateway to appear as `verified` in registry resolution responses, complete [full registration and domain verification](/docs/registry/setup) in addition to publishing this file.
 
+`capabilities` in this file are **protocol capability ids** (`product.search`, `cart.add`), not MCP tool names (`search_products`, `add_to_cart`). See [Tool Schema Overview](/docs/tool-schema/overview). This is **not** `/.well-known/ucp`.
+
 ## File location
 
 `https://{your-domain}/.well-known/commerce-gateway.json`

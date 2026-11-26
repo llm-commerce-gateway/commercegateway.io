@@ -15,6 +15,10 @@ export const SECTION_LABEL_ORDER: string[] = [
 
 const ORDERED_SLUGS = [
   "getting-started/quick-start",
+  "getting-started/shopify-and-ucp",
+  "getting-started/shopify-storefront",
+  "getting-started/woocommerce",
+  "getting-started/bigcommerce",
   "getting-started/concepts",
   "getting-started/self-host-or-hosted",
   "getting-started/self-host",

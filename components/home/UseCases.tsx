@@ -19,7 +19,7 @@ export function UseCases() {
             className="rounded-lg border p-6"
             style={{ borderColor: "var(--color-primary-light)", background: "var(--color-primary-light)" }}
           >
-            <h2 className="text-2xl">@commerce-gateway/sdk</h2>
+            <h2 className="text-2xl">@commercegateway/commerce-gateway</h2>
             <p className="mt-4 text-sm" style={{ color: "var(--color-primary-dark)" }}>
               One schema. All LLMs. Auto-translated.
             </p>
@@ -31,16 +31,16 @@ export function UseCases() {
         <div className="container">
           <h2 className="text-3xl">Commerce tooling, fully typed</h2>
           <p className="mt-2 max-w-3xl text-sm" style={{ color: "var(--color-ink-secondary)" }}>
-            The Commerce Gateway tool schema covers discovery, cart, checkout, orders, and returns across the commerce
-            lifecycle.
+            MCP tools cover product discovery, cart, and checkout. Federation tools route across registered merchants.
+            Well-known capability ids (`product.search`) are documented separately from MCP names (`search_products`).
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <ToolGroup
               title="Product Discovery"
-              tools={["product.search", "product.detail", "product.availability", "product.recommendations"]}
+              tools={["search_products", "get_product_details", "check_availability", "get_recommendations"]}
             />
-            <ToolGroup title="Cart & Checkout" tools={["cart.create", "cart.add", "cart.remove", "cart.checkout"]} />
-            <ToolGroup title="Orders & Returns" tools={["order.status", "order.history", "order.cancel", "returns.initiate"]} />
+            <ToolGroup title="Cart & Checkout" tools={["add_to_cart", "create_order"]} />
+            <ToolGroup title="Federation" tools={["shop_merchant", "discover_merchants"]} />
           </div>
           <Link href="/docs/tool-schema/overview" className="mono mt-4 inline-block text-sm" style={{ color: "var(--color-primary)" }}>
             Full tool schema reference →
@@ -59,7 +59,7 @@ export function UseCases() {
               </p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>✓ Apache-2.0 licensed</li>
-                <li>✓ Docker image available</li>
+                <li>✓ npm packages (`1.0.0-rc.2`)</li>
                 <li>✓ No usage limits</li>
                 <li>✓ No phone home</li>
               </ul>
@@ -73,7 +73,7 @@ export function UseCases() {
             >
               <h3 className="text-xl">Better Data Hosted</h3>
               <p className="mt-2 text-sm" style={{ color: "var(--color-primary-dark)" }}>
-                Production-ready. Multi-tenant. Built for scale.
+                Managed runtime (private beta — not self-serve GA).
               </p>
               <ul className="mt-4 space-y-2 text-sm">
                 <li>✓ Managed infrastructure</li>

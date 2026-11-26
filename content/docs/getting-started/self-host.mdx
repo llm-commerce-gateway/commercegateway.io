@@ -7,14 +7,11 @@ section: "Getting Started"
 ## Minimal self-host setup
 
 ```bash
-npx @commerce-gateway/server start --port 3100
+npx @commercegateway/commerce-gateway-mcp
 ```
 
-Set required environment variables:
+The CLI loads `gateway.config.json` from the current directory (or `GATEWAY_CONFIG`) and starts **stdio MCP with demo backends** unless you build a process with `createGatewayMCPServer` and a real connector.
 
-```bash
-COMMERCE_GATEWAY_PORT=3100
-COMMERCE_GATEWAY_LOG_LEVEL=info
-```
+Connect a storefront: [Shopify Storefront](/docs/getting-started/shopify-storefront), [WooCommerce](/docs/getting-started/woocommerce), or [BigCommerce](/docs/getting-started/bigcommerce).
 
-Use [Self-Hosting Overview](/docs/self-hosting/overview) for full deployment options and production hardening.
+Use [Self-Hosting Overview](/docs/self-hosting/overview) for deployment options. There is no published first-party Docker image yet ([Docker](/docs/self-hosting/docker)).

@@ -1,27 +1,34 @@
 const body = `# Commerce Gateway
 
-Commerce Gateway is an open protocol and self-hostable gateway server
-that connects any LLM (Claude, GPT-4o, Grok, Gemini) to commerce
-platforms through a single, consistent tool schema.
+Commerce Gateway is an open protocol and self-hostable gateway that
+connects LLM agents (Claude, GPT-4o, Grok, Gemini) to commerce
+backends through MCP and typed adapters.
 
-## Packages
+It is not Shopify UCP, Shop MCP, or Catalog MCP. Native Shopify AI
+channels stay on Shopify. This runtime is for first-party agents and
+multi-platform catalogs (Shopify Storefront API, WooCommerce, BigCommerce).
 
-- @commerce-gateway/sdk — main developer SDK
-- @commerce-gateway/server — self-hostable gateway server
-- @commerce-gateway/core — tool schema types and validation
-- @commerce-gateway/adapter-anthropic — Claude adapter
-- @commerce-gateway/adapter-openai — OpenAI adapter
-- @commerce-gateway/adapter-grok — Grok (xAI) adapter
-- @commerce-gateway/adapter-gemini — Gemini adapter
-- @commerce-gateway/registry — brand/product registry client
+## Packages (npm, currently 1.0.0-rc.2)
+
+- @commercegateway/commerce-gateway — core runtime, MCP factory, LLM adapters
+- @commercegateway/commerce-gateway-mcp — CLI stdio MCP server (demo backends by default)
+- @commercegateway/commerce-gateway-connectors — Shopify Storefront, WooCommerce, BigCommerce
+- @commercegateway/registry-mcp — registry discovery MCP
+- commerce-registry-protocol — protocol spec (MIT)
+
+There is no @commerce-gateway/sdk or @commerce-gateway/server package.
+
+MCP tool names include search_products, get_product_details, add_to_cart,
+create_order, shop_merchant, discover_merchants. Well-known capability ids
+(product.search, cart.add) are a separate protocol surface.
 
 ## Links
 
 - Docs: https://commercegateway.io/docs
+- Shopify coexistence: https://commercegateway.io/docs/getting-started/shopify-and-ucp
 - GitHub: https://github.com/commercegateway/commerce-gateway
-- npm: https://www.npmjs.com/org/commerce-gateway
+- npm: https://www.npmjs.com/org/commercegateway
 - Created by: Better Data (https://betterdata.co)
-- Boss Loops integration: https://loopengine.io
 `;
 
 export function GET() {
