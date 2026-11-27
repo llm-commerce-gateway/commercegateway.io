@@ -17,7 +17,7 @@ npm install @commercegateway/commerce-gateway
 npm install @commercegateway/commerce-gateway-connectors
 ```
 
-`npx @commercegateway/commerce-gateway-mcp` is the **CLI** that loads `gateway.config.json` and starts stdio MCP with demo backends. Programmatic MCP uses `createGatewayMCPServer` from `@commercegateway/commerce-gateway/mcp`.
+Published `1.0.0-rc.2`: programmatic MCP uses `createGatewayMCPServer` from `@commercegateway/commerce-gateway/mcp`. The MCP CLI (`npx @commercegateway/commerce-gateway-mcp`) on npm still expects a `gateway.config.json` (or `GATEWAY_CONFIG`). A built-in demo config when no file is present is **not** in the published package — do not treat that as an rc.2 capability.
 
 ## 1) MCP server with a connector
 
@@ -47,13 +47,14 @@ This Shopify path is the **Storefront API**, not `https://{shop}/api/ucp/mcp`. O
 
 Equivalent connectors: [Shopify Storefront](/docs/getting-started/shopify-storefront) · [WooCommerce](/docs/getting-started/woocommerce) · [BigCommerce](/docs/getting-started/bigcommerce)
 
-## 2) Claude Desktop via the MCP CLI (demo backends)
+## 2) MCP CLI (published rc.2)
 
 ```bash
+# requires gateway.config.json in the working directory, or GATEWAY_CONFIG
 npx @commercegateway/commerce-gateway-mcp
 ```
 
-With no config file this uses **demo** backends (not your store). Optional: copy `gateway.config.example.json` to `gateway.config.json` (see the [MCP package readme](https://www.npmjs.com/package/@commercegateway/commerce-gateway-mcp)).
+On **1.0.0-rc.2** a missing config file fails; it does not silently start demo backends. Prefer `createGatewayMCPServer` (section 1) for a first integration. See the [MCP package on npm](https://www.npmjs.com/package/@commercegateway/commerce-gateway-mcp).
 
 ## 3) Call an MCP tool
 

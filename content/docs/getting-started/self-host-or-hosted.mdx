@@ -50,20 +50,20 @@ Commerce Gateway is open-source. You can run it yourself for free, or use the Be
 ## Decision guide
 
 ```
-Do you need multi-tenant (multiple brands/orgs)?
-  YES → Hosted
+Do you need Better Data to operate the runtime?
+  YES → Request a qualified hosted pilot (manually provisioned; not self-serve GA)
   NO  → Self-host
 
-Do you need 99.9% uptime SLA?
-  YES → Hosted
-  NO  → Either works
+Do you need a published hosted uptime SLA?
+  YES → Not a published hosted feature — negotiate only inside a pilot agreement
+  NO  → Self-host, or a pilot if you still want Better Data to operate Node
 
 Are you evaluating Commerce Gateway?
-  YES → Start self-hosted, migrate to hosted when ready
+  YES → Start self-hosted on the published OSS packages
 
 Do you have infrastructure to manage?
   YES → Self-host
-  NO  → Hosted
+  NO  → Request a hosted pilot; there is no self-serve hosted signup
 ```
 
-You can start self-hosted and migrate to hosted at any time. The OSS packages are the same building blocks the hosted platform uses.
+The OSS packages are the same building blocks the hosted runtime uses. Hosted is a separately provisioned pilot — not a GA upgrade path you can flip on.

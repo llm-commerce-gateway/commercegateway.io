@@ -4,6 +4,11 @@ import {
   BETTERDATA_CCO_URL,
   BETTERDATA_OPEN_INFRA_URL,
   ECOSYSTEM_STRIP,
+  NPM_ORG,
+  PUBLIC_OSS_GITHUB,
+  PUBLIC_OSS_GITHUB_CONTRIBUTING,
+  PUBLIC_OSS_GITHUB_DISCUSSIONS,
+  PUBLIC_OSS_GITHUB_ISSUES,
 } from "@/lib/betterdata-ecosystem";
 import {
   BETTER_DATA_DOCS_FOOTER_SECONDARY_LINKS,
@@ -27,11 +32,11 @@ export function Footer() {
           <p className="mono" style={{ color: "var(--color-ink)" }}>
             Project
           </p>
-          <a href="https://github.com/commercegateway/commerce-gateway" target="_blank" rel="noreferrer">
+          <a href={PUBLIC_OSS_GITHUB} target="_blank" rel="noreferrer">
             GitHub
           </a>
           <br />
-          <a href="https://www.npmjs.com/org/commerce-gateway" target="_blank" rel="noreferrer">
+          <a href={NPM_ORG} target="_blank" rel="noreferrer">
             npm
           </a>
           <br />
@@ -44,11 +49,11 @@ export function Footer() {
           <p className="mono" style={{ color: "var(--color-ink)" }}>
             Community
           </p>
-          <a href="https://github.com/commercegateway/commerce-gateway/blob/main/CONTRIBUTING.md">Contributing</a>
+          <a href={PUBLIC_OSS_GITHUB_CONTRIBUTING}>Contributing</a>
           <br />
-          <a href="https://github.com/commercegateway/commerce-gateway/issues">Issues</a>
+          <a href={PUBLIC_OSS_GITHUB_ISSUES}>Issues</a>
           <br />
-          <a href="https://github.com/commercegateway/commerce-gateway/discussions">RFC Process</a>
+          <a href={PUBLIC_OSS_GITHUB_DISCUSSIONS}>RFC Process</a>
           <br />
           <span>oss@betterdata.co</span>
         </div>

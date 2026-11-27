@@ -1,6 +1,6 @@
 ---
 title: "Connector capabilities"
-description: "What each OSS connector actually supports. Normalized MCP names do not mean identical backend behavior."
+description: "What each OSS connector implements in source. Normalized MCP names do not mean identical backend behavior or independent validation."
 section: "Getting Started"
 ---
 
@@ -8,25 +8,35 @@ Connectors in `@commercegateway/commerce-gateway-connectors` (`1.0.0-rc.2`). Thi
 
 Quote partners from this page. Same MCP **names** do not mean the same **behavior**.
 
-## All three: catalog
+## How to read this matrix
 
-`search_products`, `get_product_details`, and buyer-safe availability on product/variant fields work on Shopify Storefront GraphQL, WooCommerce REST `wc/v3`, and BigCommerce REST v3.
+Three levels. Do not collapse them.
+
+1. **Implemented in source** — code exists in the connector package.
+2. **Validated in gateway or mock tests** — the core gateway test suite exercises tools against mock backends. The connector package has **no** dedicated automated tests.
+3. **Independently validated against a commerce platform** — sandbox or live storefront confirmation. **Not established** for this release. Track R owns that evidence.
+
+Nothing below is independently platform-validated.
+
+## All three: catalog (source)
+
+`search_products`, `get_product_details`, and buyer-safe availability on product/variant fields are implemented against Shopify Storefront GraphQL, WooCommerce REST `wc/v3`, and BigCommerce REST v3.
 
 `get_recommendations` is a **heuristic** (search / similar type) on all three — not a merchandising engine.
 
-## Cart
+## Cart (source)
 
 - **Shopify Storefront:** Cart API.
 - **WooCommerce:** in-memory **session cart** (Woo has no native cart API).
 - **BigCommerce:** Cart API.
 
-## `create_order`
+## `create_order` (source — not independently validated)
 
-- **Shopify Storefront:** **checkout handoff** (`checkoutCreate` + checkout URL). Not a paid completed order.
+- **Shopify Storefront:** the connector still calls Storefront **`checkoutCreate`** and returns a checkout URL. That is **handoff**, not a paid completed order. Shopify retired the legacy Checkout APIs in 2025. **Do not treat this path as operational against a currently supported Storefront API version** until Track R confirms compatibility, a Cart/`@shopify/checkout` successor, or a documented exception.
 - **WooCommerce:** REST order (`set_paid: false` unless you take payment separately).
 - **BigCommerce:** REST order.
 
-## Get order by id / number
+## Get order by id / number (source)
 
 - **Shopify Storefront:** **throws**. Admin API required.
 - **WooCommerce / BigCommerce:** REST orders.
@@ -37,5 +47,6 @@ Quote partners from this page. Same MCP **names** do not mean the same **behavio
 - Shopify UCP / Shop MCP / Catalog MCP.
 - Shopify Admin connector.
 - ERP / WMS / PO / shipment / demand-forecast tools on these storefront connectors.
+- Independent live connector certification for rc.2.
 
 Canonical file in the OSS repo: `packages/commerce-gateway-connectors/CONNECTOR_CAPABILITY.md`.

@@ -6,15 +6,16 @@ import { usePathname } from "next/navigation";
 import { inferPageType } from "@/lib/analytics/posthog";
 import { trackCtaClicked, trackOutboundClicked } from "@/lib/analytics/events";
 import { DOCS_SEARCH_OPEN_EVENT } from "@/lib/docs-search-events";
+import { PUBLIC_OSS_GITHUB, PUBLIC_OSS_GITHUB_RELEASES } from "@/lib/betterdata-ecosystem";
 
 const links = [
   { label: "DOCS", href: "/docs" },
   { label: "BLOG", href: "https://betterdata.co/blog/tags/commerce-gateway" },
   { label: "CHANGELOG", href: "https://betterdata.co/changelog?module=commerce-gateway" },
-  { label: "RELEASES", href: "https://github.com/commercegateway/commerce-gateway/releases" },
+  { label: "RELEASES", href: PUBLIC_OSS_GITHUB_RELEASES },
   { label: "PARTNERS", href: "/partners" },
   { label: "REGISTRY", href: "/registry" },
-  { label: "GITHUB", href: "https://github.com/commercegateway/commerce-gateway" },
+  { label: "GITHUB", href: PUBLIC_OSS_GITHUB },
 ];
 
 export function TopNav() {
@@ -30,12 +31,8 @@ export function TopNav() {
   return (
     <header
       style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 40,
         borderBottom: "1px solid var(--color-border)",
-        backdropFilter: "blur(8px)",
-        background: "color-mix(in srgb, var(--color-surface) 86%, transparent)",
+        background: "var(--color-surface)",
       }}
     >
       <div className="container flex min-h-14 items-center justify-between gap-4 py-2">

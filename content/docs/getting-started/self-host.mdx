@@ -6,11 +6,13 @@ section: "Getting Started"
 
 ## Minimal self-host setup
 
+Prefer programmatic MCP (`createGatewayMCPServer`) from [Quick start](/docs/getting-started/quick-start). The published MCP CLI (`1.0.0-rc.2`) needs `gateway.config.json` or `GATEWAY_CONFIG`:
+
 ```bash
 npx @commercegateway/commerce-gateway-mcp
 ```
 
-The CLI loads `gateway.config.json` from the current directory (or `GATEWAY_CONFIG`) and starts **stdio MCP with demo backends** unless you build a process with `createGatewayMCPServer` and a real connector.
+A missing config file does **not** start demo backends on the published package.
 
 Connect a storefront: [Shopify Storefront](/docs/getting-started/shopify-storefront), [WooCommerce](/docs/getting-started/woocommerce), or [BigCommerce](/docs/getting-started/bigcommerce).
 

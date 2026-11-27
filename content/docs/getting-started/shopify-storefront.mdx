@@ -40,11 +40,13 @@ const server = createGatewayMCPServer({
 server.start();
 ```
 
-## What works
+## What is implemented in source
+
+These operations exist in the Shopify Storefront connector. They are **not** independently validated against a current Shopify API version.
 
 - Catalog search and product detail (`search_products`, `get_product_details`)
 - Cart mutations via Shopify Cart API
-- Checkout create via Storefront checkout
+- `create_order` still uses Storefront `checkoutCreate` (checkout URL handoff). Shopify retired legacy Checkout APIs in 2025. **Do not assume this handoff works** on a supported API version until Track R confirms it.
 
 ## What does not
 

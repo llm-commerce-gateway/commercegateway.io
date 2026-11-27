@@ -11,7 +11,7 @@ multi-platform catalogs (Shopify Storefront API, WooCommerce, BigCommerce).
 ## Packages (npm, currently 1.0.0-rc.2)
 
 - @commercegateway/commerce-gateway — core runtime, MCP factory, LLM adapters
-- @commercegateway/commerce-gateway-mcp — CLI stdio MCP server (demo backends by default)
+- @commercegateway/commerce-gateway-mcp — CLI stdio MCP server (published rc.2 requires gateway.config.json)
 - @commercegateway/commerce-gateway-connectors — Shopify Storefront, WooCommerce, BigCommerce
 - @commercegateway/registry-mcp — registry discovery MCP
 - commerce-registry-protocol — protocol spec (MIT)
@@ -26,7 +26,7 @@ create_order, shop_merchant, discover_merchants. Well-known capability ids
 
 - Docs: https://commercegateway.io/docs
 - Shopify coexistence: https://commercegateway.io/docs/getting-started/shopify-and-ucp
-- GitHub: https://github.com/commercegateway/commerce-gateway
+- GitHub: https://github.com/llm-commerce-gateway/llm-commerce-gateway
 - npm: https://www.npmjs.com/org/commercegateway
 - Created by: Better Data (https://betterdata.co)
 `;

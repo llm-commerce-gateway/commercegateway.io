@@ -63,8 +63,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="antialiased">
         <GoogleAnalytics />
         <PostHogProvider>
-          <EcosystemBanner />
-          <TopNav />
+          <div className="sticky top-0 z-40" style={{ background: "var(--color-surface)" }}>
+            <EcosystemBanner />
+            <TopNav />
+          </div>
           <DocsSearchModalHost />
           {children}
           <Footer />

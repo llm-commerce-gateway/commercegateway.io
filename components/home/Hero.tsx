@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BETTERDATA_CCO_URL, GATEWAY_ROLE_LINE } from "@/lib/betterdata-ecosystem";
+import { BETTERDATA_CCO_URL, GATEWAY_ROLE_LINE, PUBLIC_OSS_GITHUB } from "@/lib/betterdata-ecosystem";
 
 export function Hero() {
   return (
@@ -25,7 +25,7 @@ export function Hero() {
           <p className="mt-4 max-w-[600px] text-sm leading-relaxed" style={{ color: "var(--color-ink-secondary)" }}>
             {GATEWAY_ROLE_LINE}
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 scroll-mt-40">
             <Link
               href="/docs/getting-started/quick-start"
               className="mono rounded px-5 py-3"
@@ -34,7 +34,7 @@ export function Hero() {
               Get Started
             </Link>
             <a
-              href="https://github.com/commercegateway/commerce-gateway"
+              href={PUBLIC_OSS_GITHUB}
               target="_blank"
               rel="noreferrer"
               className="mono rounded border px-5 py-3"

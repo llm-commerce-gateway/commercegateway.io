@@ -10,7 +10,7 @@ export function HowItWorks() {
     },
     {
       title: "Expose MCP tools",
-      body: "createGatewayMCPServer (or the MCP CLI with demo backends) so your agent can call search_products and related tools. Registry MCP is optional discovery, not execution.",
+      body: "createGatewayMCPServer so your agent can call search_products and related tools. Registry MCP is optional discovery, not execution.",
     },
     {
       title: "Expand when you need ops",

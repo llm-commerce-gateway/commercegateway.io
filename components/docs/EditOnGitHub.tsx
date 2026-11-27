@@ -7,7 +7,7 @@ type EditOnGitHubProps = {
 };
 
 function editUrl(filePath: string): string {
-  const org = process.env.NEXT_PUBLIC_DOCS_GIT_ORG ?? "commercegateway";
+  const org = process.env.NEXT_PUBLIC_DOCS_GIT_ORG ?? "llm-commerce-gateway";
   const repo = process.env.NEXT_PUBLIC_DOCS_GIT_REPO ?? "commercegateway.io";
   const branch = process.env.NEXT_PUBLIC_DOCS_GIT_BRANCH ?? "main";
   const root = `https://github.com/${org}/${repo}/edit/${branch}/content/docs`;
